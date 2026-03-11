@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>TS EQUIPEMENTS – Équipements Football &amp; Basketball</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TS EQUIPEMENTS – Équipements Football &amp; Basketball professionnels certifiés. Lomé &amp; Vogan, Togo.">
+<meta property="og:title" content="TS EQUIPEMENTS – Football &amp; Basketball">
+<meta property="og:image" content="assets/logo-ts.png">
+<link rel="icon" href="assets/logo-ts.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── TAILLES RÉELLES ASSETS ── */
+.pi-sq{width:100%;height:206px;background:#f0f4f1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pi-sq img{width:206px;height:206px;object-fit:contain;transition:opacity .22s,transform .35s;}
+.pi-land{width:100%;height:155px;background:#f0f4f1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pi-land img{width:100%;max-width:206px;height:155px;object-fit:contain;transition:opacity .22s,transform .35s;}
+.pi-sq img:hover,.pi-land img:hover{transform:scale(1.06);}
+.img-fading{opacity:0 !important;}
+
+/* ── SÉLECTEUR ── */
+.model-sel{display:flex;flex-direction:column;gap:3px;margin:5px 0;}
+.model-sel label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;}
+.model-sel select{padding:5px 8px;border-radius:4px;border:1px solid #dde3dd;font-size:.85rem;background:white;cursor:pointer;outline:none;}
+.model-sel select:focus{border-color:#0c7a38;}
+
+/* ── COLOR DOTS SURVÊTEMENT ── */
+.color-dots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0;}
+.color-dot{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .2s,border-color .2s;}
+.color-dot:hover,.color-dot.active{border-color:#0c7a38;transform:scale(1.2);}
+
+/* ── BESTSELLERS STRIP ── */
+.bestsellers{background:#0a0a0a;padding:80px 0;overflow:hidden;}
+.bestsellers .section-header{padding:0 5%;}
+.bestsellers .section-header .eyebrow{color:#00e96a;}
+.bestsellers .section-header h2{color:white;}
+.bestsellers .section-header p{color:rgba(255,255,255,.5);}
+.scroll-track-wrap{position:relative;margin-top:40px;overflow:hidden;}
+.scroll-track-wrap::before,.scroll-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.scroll-track-wrap::before{left:0;background:linear-gradient(to right,#0a0a0a,transparent);}
+.scroll-track-wrap::after{right:0;background:linear-gradient(to left,#0a0a0a,transparent);}
+.scroll-track{display:flex;gap:20px;padding:10px 40px;animation:scrollLeft 42s linear infinite;width:max-content;}
+.scroll-track:hover{animation-play-state:paused;}
+@keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.bs-card{flex-shrink:0;width:180px;background:#111a14;border-radius:8px;overflow:hidden;border:1px solid rgba(0,233,106,.12);transition:border-color .3s,transform .3s;}
+.bs-card:hover{border-color:rgba(0,233,106,.5);transform:translateY(-4px);}
+.bs-img{width:180px;height:180px;background:#1a241c;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.bs-img img{width:180px;height:180px;object-fit:contain;}
+.bs-label{padding:10px 12px;font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:center;}
+
+/* ── SOCIAL STRIP ── */
+.social-section{background:#f0f5f1;padding:80px 0;overflow:hidden;}
+.social-section .section-header{padding:0 5%;}
+.social-scroll-wrap{position:relative;margin-top:40px;overflow:hidden;}
+.social-scroll-wrap::before,.social-scroll-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.social-scroll-wrap::before{left:0;background:linear-gradient(to right,#f0f5f1,transparent);}
+.social-scroll-wrap::after{right:0;background:linear-gradient(to left,#f0f5f1,transparent);}
+.social-track{display:flex;gap:20px;padding:10px 40px;animation:scrollLeft 36s linear infinite;width:max-content;}
+.social-track:hover{animation-play-state:paused;}
+.social-card{flex-shrink:0;width:200px;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.12);transition:transform .3s,box-shadow .3s;}
+.social-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 40px rgba(0,0,0,.2);}
+.social-card img{width:200px;height:320px;object-fit:cover;display:block;}
+.social-placeholder{width:200px;height:320px;background:#dde8e0;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#0c7a38;}
+
+/* ════════════════════════════════
+   HERO BRAND LOGO (TS + ÉQUIPEMENTS + SPORT)
+   ════════════════════════════════ */
+.hero-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  line-height: 1;
+  /* Annule le style générique .hero h1 */
+  font-size: unset;
+  color: unset;
+}
+/* Ligne 1 : [TS][ÉQUIPEMENTS] côte à côte */
+.hero-brand-line1 {
+  display: inline-flex;
+  align-items: stretch;
+}
+/* "TS" : carré jaune, texte noir */
+.hb-ts {
+  background: #ffd400;
+  color: #000;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* "ÉQUIPEMENTS" : rectangle noir, texte blanc */
+.hb-equip {
+  background: #111111;
+  color: #ffffff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 3px;
+  padding: 8px 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Ligne 2 : "FOOTBALL & BASKET" en jaune */
+.hb-sport {
+  color: #ffd400;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+/* ── HEADER LOGO BADGE ── */
+/* "TS" badge jaune/noir dans le header */
+.lt-ts {
+  background: #ffd400;
+  color: #000;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  padding: 2px 7px;
+  margin-right: 5px;
+  display: inline-block;
+  line-height: 1.5;
+}
+/* "EQUIPEMENTS" texte blanc normal */
+.lt-equip {
+  color: #ffffff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+}
+
+/* ── FOOTER LOGO BADGE ── */
+.fl-ts {
+  background: #ffd400;
+  color: #000;
+  font-weight: 900;
+  padding: 1px 6px;
+  margin-right: 4px;
+  display: inline-block;
+}
+.fl-equip {
+  color: #ffffff;
+  letter-spacing: 3px;
+}
+
+/* ── RESPONSIVE hero brand ── */
+@media (max-width: 560px) {
+  .hb-ts, .hb-equip {
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
+    padding: 6px 12px;
+  }
+  .hb-sport {
+    font-size: clamp(0.85rem, 4vw, 1.1rem);
+    letter-spacing: 3px;
+  }
+  .lt-ts, .lt-equip { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">✔ Produit ajouté au panier !</div>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <div class="logo-box">
+    <img src="assets/logo-ts.png" alt="Logo TS EQUIPEMENTS">
+    <!-- Badge header : [TS jaune][EQUIPEMENTS blanc] -->
+    <div class="logo-text">
+      <span class="lt-ts">TS</span><span class="lt-equip">EQUIPEMENTS</span>
+    </div>
+  </div>
+  <div class="burger" id="burger" role="button" tabindex="0" aria-label="Menu">
+    <div></div><div></div><div></div>
+  </div>
+  <nav>
+    <div class="nav-links" id="nav-links">
+      <a href="pages/football.html">⚽ Football</a>
+      <a href="pages/basketball.html">🏀 Basketball</a>
+      <a href="#products">Produits</a>
+      <a href="#bestsellers">Top Ventes</a>
+      <a href="#social">Social</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="cart-btn" aria-label="Panier">🛒 Panier <span id="cart-count">0</span></button>
+  </nav>
+</header>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <!-- FIX : background-image correctement renseigné -->
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1600&q=80')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="assets/logo-ts.png" alt="TS EQUIPEMENTS" class="hero-logo">
+    <span class="hero-tag">🌍 Spécialiste Sportif – Togo &amp; Afrique</span>
+
+    <!-- Logo stylisé : [TS jaune][ÉQUIPEMENTS noir] + FOOTBALL & BASKET jaune -->
+    <h1 class="hero-brand">
+      <span class="hero-brand-line1">
+        <span class="hb-ts">TS</span><span class="hb-equip">ÉQUIPEMENTS</span>
+      </span>
+      <span class="hb-sport">FOOTBALL &amp; BASKET</span>
+    </h1>
+
+    <p>Matériel certifié pour clubs, académies et sportifs de haut niveau. Disponible à Lomé et Vogan.</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-primary">🏆 Voir nos équipements</a>
+      <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-whatsapp">💬 Commander sur WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item"><h3>2</h3><p>Boutiques au Togo</p></div>
+  <div class="stat-item"><h3>500+</h3><p>Clubs équipés</p></div>
+  <div class="stat-item"><h3>15+</h3><p>Pays livrés</p></div>
+  <div class="stat-item"><h3>100%</h3><p>Produits certifiés</p></div>
+</div>
+
+<!-- NOS SPORTS -->
+<section class="section" id="sports">
+  <div class="section-header">
+    <span class="eyebrow">Nos disciplines</span>
+    <h2>CHOISISSEZ <span>VOTRE</span> SPORT</h2>
+    <p>Des équipements taillés pour la performance. Football ou Basketball, on vous couvre.</p>
+  </div>
+  <div class="sports-grid">
+    <a href="pages/football.html" class="sport-card">
+      <div class="sport-card-bg" style="background-image:url('assets/stade-football.jpg');background-position:center 35%"></div>
+      <div class="sport-card-overlay"></div>
+      <div class="sport-card-content">
+        <h3>⚽ Football</h3>
+        <p>Chaussures, ballons, tenues et équipements d'entraînement professionnels.</p>
+        <span class="sport-card-link">Voir le catalogue →</span>
+      </div>
+    </a>
+    <a href="pages/basketball.html" class="sport-card">
+      <div class="sport-card-bg" style="background-image:url('https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80')"></div>
+      <div class="sport-card-overlay"></div>
+      <div class="sport-card-content">
+        <h3>🏀 Basketball</h3>
+        <p>Ballons officiels, chaussures indoor et protections haute performance.</p>
+        <span class="sport-card-link">Voir le catalogue →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══ PRODUITS PHARES ══ -->
+<section class="section" id="products" style="background:white;">
+  <div class="section-header">
+    <span class="eyebrow">Sélection premium</span>
+    <h2>PRODUITS <span>PHARES</span></h2>
+    <p>Nos best-sellers choisis par les clubs et athlètes professionnels d'Afrique.</p>
+  </div>
+  <div class="product-carousel">
+
+  <!-- 1. BALLON FIFA -->
+  <div class="product" data-price="25000">
+    <div class="badge new">FOOTBALL</div>
+    <div class="pi-sq" id="wrap-fifa">
+      <img id="img-fifa" src="assets/Ballon de football taille 5 (match).png" alt="Ballon FIFA T5"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>⚽</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-fifa">Ballon FIFA – Taille 5 (Match)</h4>
+      <p id="desc-fifa">Ballon match officiel T5, homologué FIFA Basic</p>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select onchange="changeFifa(this.value)">
+          <option value="3">Taille 3 – Enfant (18 000 F)</option>
+          <option value="4">Taille 4 – Junior (20 000 F)</option>
+          <option value="5" selected>Taille 5 – Match (25 000 F)</option>
+        </select>
+      </div>
+      <div class="price" id="price-fifa">25 000 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. BALLON BASKETBALL -->
+  <div class="product" data-price="25000">
+    <div class="badge new">BASKET</div>
+    <div class="pi-sq" id="wrap-bask">
+      <img id="img-bask" src="assets/bask ball taille 6 .png" alt="Ballon Basketball T6"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏀</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-bask">Ballon Basketball – Taille 6</h4>
+      <p id="desc-bask">Ballon officiel T6 – Femmes &amp; Juniors, grip renforcé indoor &amp; outdoor</p>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select onchange="changeBask(this.value)">
+          <option value="5">Taille 5 – Enfant (20 000 F)</option>
+          <option value="6" selected>Taille 6 – Junior (25 000 F)</option>
+        </select>
+      </div>
+      <div class="price" id="price-bask">25 000 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CHAUSSURES FOOTBALL -->
+  <div class="product" data-price="12000">
+    <div class="badge">TOP</div>
+    <div class="pi-sq" id="wrap-shoe">
+      <img id="img-shoe" src="assets/Adidas Predator Elite.png" alt="Adidas Predator Elite"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👟</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-shoe">Chaussures Indoor/Outdoor – Football</h4>
+      <p id="desc-shoe">Adidas Predator Elite – crampons terrain naturel &amp; synthétique</p>
+      <div class="model-sel">
+        <label>Modèle</label>
+        <select onchange="changeShoe(this.value)">
+          <option value="Adidas Predator Elite">Adidas Predator Elite (12 000 F)</option>
+          <option value="adidas predator">Adidas Predator Standard (13 000 F)</option>
+          <option value="Adidas X Speedportal">Adidas X Speedportal (14 000 F)</option>
+          <option value="Nike Air Zoom Mercurial">Nike Air Zoom Mercurial (17 000 F)</option>
+          <option value="nike golden goose">Nike Golden Goose (19 000 F)</option>
+        </select>
+      </div>
+      <div class="model-sel">
+        <label>Pointure</label>
+        <select>
+          <option>39</option><option>40</option><option>41</option>
+          <option>42</option><option>43</option><option>44</option><option>45</option>
+        </select>
+      </div>
+      <div class="price" id="price-shoe">12 000 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. MAILLOT CLUB OFFICIEL -->
+  <div class="product" data-price="7500">
+    <div class="badge promo">PROMO</div>
+    <div class="pi-sq" id="wrap-jersey">
+      <img id="img-jersey" src="assets/adidas.png" alt="Maillot Adidas"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-jersey">Maillot Club Officiel – Adidas</h4>
+      <p id="desc-jersey">Maillot club Adidas, tissu respirant, personnalisable</p>
+      <div class="model-sel">
+        <label>Modèle</label>
+        <select onchange="changeJersey(this.value)">
+          <option value="adidas">Adidas (7 500 F)</option>
+          <option value="adidas1">Adidas Premium (8 000 F)</option>
+          <option value="cma">CMA (6 500 F)</option>
+          <option value="emirates">Emirates (7 500 F)</option>
+          <option value="italie 2">Italie 2 (8 500 F)</option>
+          <option value="italie">Italie Classic (6 500 F)</option>
+          <option value="nike">Nike (9 500 F)</option>
+          <option value="Olympique Marseille">Olympique Marseille (7 500 F)</option>
+          <option value="qatar">Qatar (8 500 F)</option>
+          <option value="ts equipements">TS Equipements (5 500 F)</option>
+        </select>
+      </div>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+      </div>
+      <div class="price" id="price-jersey">7 500 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. MAILLOTS CLUB ENSEMBLE -->
+  <div class="product" data-price="9500">
+    <div class="badge new">CLUB</div>
+    <div class="pi-sq" id="wrap-club">
+      <img id="img-club" src="assets/Maillots CLUB 1.png" alt="Maillots CLUB 1"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-club">Maillots CLUB – Modèle 1</h4>
+      <p id="desc-club">Ensemble club professionnel, tissu dry-fit, personnalisable</p>
+      <div class="model-sel">
+        <label>Modèle</label>
+        <select onchange="changeClub(this.value)">
+          <option value="1">Maillots CLUB 1 (9 500 F)</option>
+          <option value="2">Maillots CLUB 2 (8 500 F)</option>
+          <option value="3">Maillots CLUB 3 (7 500 F)</option>
+          <option value="a">Maillots CLUB A (8 500 F)</option>
+          <option value="b">Maillots CLUB B (9 500 F)</option>
+        </select>
+      </div>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+      </div>
+      <div class="price" id="price-club">9 500 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SURVÊTEMENT -->
+  <div class="product" data-price="15500">
+    <div class="pi-sq" id="wrap-surv">
+      <img id="img-surv" src="assets/Survêtement Blanc 1.png" alt="Survêtement Blanc 1"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏃</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-surv">Survêtement Blanc 1</h4>
+      <p id="desc-surv">Survêtement pro, coupe athlétique, matière respirante</p>
+      <div class="color-dots" id="dots-surv">
+        <div class="color-dot active" style="background:#f0ede8" title="Blanc 1"  onclick="changeSurv('Blanc 1',this,15500)"></div>
+        <div class="color-dot"        style="background:#e0e0e0" title="Blanc 2"  onclick="changeSurv('Blanc 2',this,16500)"></div>
+        <div class="color-dot"        style="background:#9e9e9e" title="Cendré"   onclick="changeSurv('cendre',this,15000)"></div>
+        <div class="color-dot"        style="background:#616161" title="Gris"     onclick="changeSurv('Gris',this,15000)"></div>
+        <div class="color-dot"        style="background:#ffd600" title="Jaune"    onclick="changeSurv('Jaune',this,16000)"></div>
+        <div class="color-dot"        style="background:#e65100" title="Orange"   onclick="changeSurv('orange',this,14500)"></div>
+        <div class="color-dot"        style="background:#c62828" title="Rouge"    onclick="changeSurv('Rouge',this,15000)"></div>
+        <div class="color-dot"        style="background:#0c7a38" title="Vert"     onclick="changeSurv('Vert',this,16500)"></div>
+      </div>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+      </div>
+      <div class="price" id="price-surv">15 500 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. MAILLOT DE BASKETBALL -->
+  <div class="product" data-price="8500">
+    <div class="badge new">BASKET</div>
+    <div class="pi-sq" id="wrap-bmaillot">
+      <img id="img-bmaillot" src="assets/Maillot de basketball 1.png" alt="Maillot Basketball 1"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏀</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-bmaillot">Maillot Basketball – N°1</h4>
+      <p>Maillot basket pro, tissu dry-fit léger, personnalisable numéro &amp; logo</p>
+      <div class="model-sel">
+        <label>Modèle</label>
+        <select onchange="changeBMaillot(this.value)">
+          <option value="1">Modèle 1 (8 500 F)</option>
+          <option value="2">Modèle 2 (8 500 F)</option>
+          <option value="3">Modèle 3 (7 500 F)</option>
+          <option value="4">Modèle 4 (8 500 F)</option>
+          <option value="5">Modèle 5 (7 500 F)</option>
+          <option value="6">Modèle 6 (6 500 F)</option>
+          <option value="7">Modèle 7 (7 500 F)</option>
+          <option value="8">Modèle 8 (7 500 F)</option>
+          <option value="9">Modèle 9 (7 500 F)</option>
+          <option value="10">Modèle 10 (6 500 F)</option>
+          <option value="11">Modèle 11 (8 500 F)</option>
+          <option value="12">Modèle 12 (7 500 F)</option>
+        </select>
+      </div>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+      </div>
+      <div class="price" id="price-bmaillot">8 500 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CHRONOMÈTRE SHOT CLOCK -->
+  <div class="product" data-price="25000">
+    <div class="badge">PRO</div>
+    <div class="pi-sq" id="wrap-chrono">
+      <img id="img-chrono" src="assets/Chronomètre shot clock d.png" alt="Shot Clock Doré"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>⏱️</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-chrono">Chronomètre Shot Clock – Doré</h4>
+      <p>Shot clock officiel, affichage LED haute visibilité, usage salle &amp; terrain</p>
+      <div class="model-sel">
+        <label>Modèle</label>
+        <select onchange="changeChrono(this.value)">
+          <option value="d">Shot Clock Doré (25 000 F)</option>
+          <option value="j">Shot Clock Jaune (30 000 F)</option>
+        </select>
+      </div>
+      <div class="price" id="price-chrono">25 000 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. CÔNES D'ENTRAÎNEMENT — image initiale cohérente avec coneMap['std'] -->
+  <div class="product" data-price="5500">
+    <div class="pi-sq" id="wrap-cone">
+      <img id="img-cone" src="assets/Cônes d'Entraînement 1.png" alt="Cônes Entraînement"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🔶</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-cone">Cônes d'Entraînement – Lot Standard</h4>
+      <p>Cônes pro résistants UV, lot pour entraînements club</p>
+      <div class="model-sel">
+        <label>Lot</label>
+        <select onchange="changeCone(this.value)">
+          <option value="std">Lot Standard (5 500 F)</option>
+          <option value="2">Lot Compact 2 (4 500 F)</option>
+          <option value="3">Lot Compact 3 (3 500 F)</option>
+          <option value="4">Lot Pro 4 (4 500 F)</option>
+          <option value="5">Lot Pro 5 (3 500 F)</option>
+        </select>
+      </div>
+      <div class="price" id="price-cone">5 500 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. GENOUILLÈRES -->
+  <div class="product" data-price="6500">
+    <div class="pi-sq" id="wrap-knee">
+      <img id="img-knee" src="assets/Genouillères KNEE 1.png" alt="Genouillères KNEE 1"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🦵</span>'">
+    </div>
+    <div class="product-body">
+      <h4 id="name-knee">Genouillères KNEE – Modèle 1</h4>
+      <p>Protection genou pro, maintien optimal, confort toute la durée du match</p>
+      <div class="model-sel">
+        <label>Modèle</label>
+        <select onchange="changeKnee(this.value)">
+          <option value="1">KNEE 1 (6 500 F)</option>
+          <option value="2">KNEE 2 (6 500 F)</option>
+          <option value="v">KNEE V (7 500 F)</option>
+          <option value="x">KNEE X (8 500 F)</option>
+        </select>
+      </div>
+      <div class="model-sel">
+        <label>Taille</label>
+        <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+      </div>
+      <div class="price" id="price-knee">6 500 F CFA</div>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. ACCESSOIRES SPORTIFS -->
+  <div class="product" data-price="25000">
+    <div class="pi-sq">
+      <img src="assets/Accessoires sportero.png" alt="Accessoires sportifs"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🎽</span>'">
+    </div>
+    <div class="product-body">
+      <h4>Accessoires Sportifs</h4>
+      <p>Cônes, sifflets, sacs de sport, bouteilles d'eau</p>
+      <div class="product-actions">
+        <button class="add">🛒 Ajouter au panier</button>
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. ÉQUIPEMENTS D'ENTRAÎNEMENT — FIX balise img fermée + conteneur -->
+  <div class="product" data-price="0">
+    <div class="pi-sq">
+      <img src="assets/Équipements d'Entraînement.png" alt="Équipements d'Entraînement"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏋️</span>'">
+    </div>
+    <div class="product-body">
+      <h4>Équipements d'Entraînement</h4>
+      <p>Appareils de musculation, accessoires de fitness, équipements polyvalents et spécialisés</p>
+      <div class="product-actions">
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Demander un devis</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. COSMÉTIQUE SPORTIF — FIX balise img fermée + conteneur -->
+  <div class="product" data-price="0">
+    <div class="pi-sq">
+      <img src="assets/Gel douche Adidas.png" alt="Gel douche Adidas"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🧴</span>'">
+    </div>
+    <div class="product-body">
+      <h4>Cosmétique Sportif</h4>
+      <p>Gel douche, déodorant et crème hydratante après l'effort — homme &amp; femme</p>
+      <div class="model-sel">
+        <label>Genre</label>
+        <select><option>Masculin</option><option>Féminin</option><option>Mixte</option></select>
+      </div>
+      <div class="price" style="color:var(--green);font-size:1rem;">Sur devis</div>
+      <div class="product-actions">
+        <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /product-carousel -->
+</section>
+
+<!-- AVANTAGES -->
+<div class="advantages-strip">
+  <div class="adv-item"><div class="adv-icon">🏅</div><h3>Produits certifiés</h3><p>Qualité pro homologuée</p></div>
+  <div class="adv-item"><div class="adv-icon">🚚</div><h3>Livraison rapide</h3><p>Partout en Afrique</p></div>
+  <div class="adv-item"><div class="adv-icon">📱</div><h3>Paiement sécurisé</h3><p>Mobile Money &amp; Carte</p></div>
+  <div class="adv-item"><div class="adv-icon">🤝</div><h3>Support clubs</h3><p>Accompagnement des équipes</p></div>
+</div>
+
+<!-- MARQUES -->
+<div class="brands-strip">
+  <span class="brand-name">Nike</span>
+  <span class="brand-name">Adidas</span>
+  <span class="brand-name">Puma</span>
+  <span class="brand-name">Under Armour</span>
+  <span class="brand-name">Mitre</span>
+  <span class="brand-name">Select</span>
+</div>
+
+<!-- ══ ARTICLES LES PLUS VENDUS ══ -->
+<section class="bestsellers" id="bestsellers">
+  <div class="section-header">
+    <span class="eyebrow">Best-sellers</span>
+    <h2>ARTICLES LES PLUS <span>VENDUS</span></h2>
+    <p>Survolez pour mettre en pause — nos produits les plus demandés par nos clients</p>
+  </div>
+  <div class="scroll-track-wrap">
+    <div class="scroll-track">
+      <div class="bs-card"><div class="bs-img"><img src="assets/Accessoires.png"               alt="Accessoires"      onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🎽</span>'"></div><div class="bs-label">Accessoires</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/chaussette.png"                alt="Chaussettes"      onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🧦</span>'"></div><div class="bs-label">Chaussettes</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Chevillière.png"               alt="Chevillière"      onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🦶</span>'"></div><div class="bs-label">Chevillière</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Gel douche Adidas.png"         alt="Gel douche Adidas" onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🧴</span>'"></div><div class="bs-label">Gel douche</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Medaillen.png"                 alt="Médailles"        onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🏅</span>'"></div><div class="bs-label">Médailles</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Piquets de slalom.png"         alt="Piquets slalom"   onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🔰</span>'"></div><div class="bs-label">Piquets Slalom</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Protège-tibias 1.png"          alt="Protège-tibias 1" onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🦵</span>'"></div><div class="bs-label">Protège-tibias</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Protège-tibias.png"            alt="Protège-tibias Pro" onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🦵</span>'"></div><div class="bs-label">Protège-tibias Pro</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Tableau d'affichage score  z.png" alt="Tableau Score Z" onerror="this.parentElement.innerHTML='<span style=font-size:2rem>📋</span>'"></div><div class="bs-label">Tableau Score Z</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Tableau d'affichage score x.png" alt="Tableau Score X" onerror="this.parentElement.innerHTML='<span style=font-size:2rem>📋</span>'"></div><div class="bs-label">Tableau Score X</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/trophée.png"                   alt="Trophée"          onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🏆</span>'"></div><div class="bs-label">Trophées</div></div>
+      <!-- Duplicata pour boucle infinie seamless -->
+      <div class="bs-card"><div class="bs-img"><img src="assets/Accessoires.png"               alt="Accessoires"></div><div class="bs-label">Accessoires</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/chaussette.png"                alt="Chaussettes"></div><div class="bs-label">Chaussettes</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Chevillière.png"               alt="Chevillière"></div><div class="bs-label">Chevillière</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Gel douche Adidas.png"         alt="Gel douche"></div><div class="bs-label">Gel douche</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Medaillen.png"                 alt="Médailles"></div><div class="bs-label">Médailles</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Piquets de slalom.png"         alt="Piquets slalom"></div><div class="bs-label">Piquets Slalom</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Protège-tibias 1.png"          alt="Protège-tibias 1"></div><div class="bs-label">Protège-tibias</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Protège-tibias.png"            alt="Protège-tibias Pro"></div><div class="bs-label">Protège-tibias Pro</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Tableau d'affichage score  z.png" alt="Tableau Z"></div><div class="bs-label">Tableau Score Z</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/Tableau d'affichage score x.png" alt="Tableau X"></div><div class="bs-label">Tableau Score X</div></div>
+      <div class="bs-card"><div class="bs-img"><img src="assets/trophée.png"                   alt="Trophée"></div><div class="bs-label">Trophées</div></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px;">
+    <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;">💬 Commander via WhatsApp</a>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="testimonials">
+  <div class="section-header">
+    <span class="eyebrow" style="color:var(--green-neon)">Avis clients</span>
+    <h2 style="color:white;">ILS NOUS <span>FONT CONFIANCE</span></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Service rapide, produits de qualité professionnelle. Nos joueurs sont ravis de leurs équipements."</blockquote>
+      <cite>— Club Olympique de Lomé</cite>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Notre académie recommande TS EQUIPEMENTS sans hésiter. Fiabilité et réactivité au rendez-vous."</blockquote>
+      <cite>— Académie Football Togo</cite>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Les maillots personnalisés sont impeccables. Livraison rapide, même en région. Merci TS !"</blockquote>
+      <cite>— Club Basketball Vogan</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACTIVITÉS SOCIALES RÉCENTES ══ -->
+<section class="social-section" id="social">
+  <div class="section-header">
+    <span class="eyebrow">Sur le terrain</span>
+    <h2>ACTIVITÉS SOCIALES <span>RÉCENTES</span></h2>
+    <p>Nos équipes en action — clubs, académies et partenaires à travers le Togo.</p>
+  </div>
+  <div class="social-scroll-wrap">
+    <div class="social-track">
+      <div class="social-card"><img src="assets/social 1.png" alt="Social 1" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social 2.png" alt="Social 2" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social 3.png" alt="Social 3" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social 4.png" alt="Social 4" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social a.png" alt="Social A" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social b.png" alt="Social B" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social c.png" alt="Social C" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <!-- Duplicata pour boucle infinie seamless -->
+      <div class="social-card"><img src="assets/social 1.png" alt="Social 1" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social 2.png" alt="Social 2" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social 3.png" alt="Social 3" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social 4.png" alt="Social 4" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social a.png" alt="Social A" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social b.png" alt="Social B" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+      <div class="social-card"><img src="assets/social c.png" alt="Social C" onerror="this.parentElement.innerHTML='<div class=social-placeholder>📸</div>'"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUTIQUES + CARTES -->
+<section class="contact-section" id="contact">
+  <div class="section-header">
+    <span class="eyebrow">Où nous trouver</span>
+    <h2>NOS <span>BOUTIQUES</span></h2>
+    <p>Deux points de vente au Togo pour vous servir au plus proche.</p>
+  </div>
+  <div class="stores-grid">
+    <div class="store-card">
+      <div id="map-lome" class="store-map"></div>
+      <div class="store-info">
+        <h3>📍 Lomé – Dagué <span class="store-badge">SIÈGE</span></h3>
+        <p>📞 <strong>WhatsApp / Appel :</strong> +228 92 74 74 64</p>
+        <p>📞 <strong>Appel :</strong> +228 98 69 68 61</p>
+        <!-- FIX : email en clair, sans obfuscation Cloudflare -->
+        <p>✉️ <strong>Email :</strong> <a href="mailto:contact@tsequipements.com">contact@tsequipements.com</a></p>
+        <p style="margin-top:10px;">
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-whatsapp" style="font-size:.85rem;padding:10px 18px;">💬 Contacter Lomé</a>
+        </p>
+      </div>
+    </div>
+    <div class="store-card">
+      <div id="map-vogan" class="store-map"></div>
+      <div class="store-info">
+        <h3>📍 Vogan <span class="store-badge">BOUTIQUE</span></h3>
+        <p>📞 <strong>WhatsApp / Appel :</strong> +228 90 48 48 81</p>
+        <p>📞 <strong>Appel :</strong> +228 97 89 25 89</p>
+        <p>✉️ <strong>Email :</strong> <a href="mailto:contact@tsequipements.com">contact@tsequipements.com</a></p>
+        <p style="margin-top:10px;">
+          <a href="https://wa.me/22890484881" target="_blank" rel="noopener" class="btn-whatsapp" style="font-size:.85rem;padding:10px 18px;">💬 Contacter Vogan</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULAIRE CONTACT -->
+<section class="contact-form-wrap">
+  <div class="contact-inner">
+    <div class="section-header">
+      <span class="eyebrow" style="color:var(--green-neon)">Devis &amp; Commandes</span>
+      <h2 style="color:white;">ENVOYEZ-NOUS <span>UN MESSAGE</span></h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="fname">Prénom / Club</label>
+        <input type="text" id="fname" placeholder="Ex: Club AS Dragon" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="fphone">Téléphone / WhatsApp</label>
+        <input type="tel" id="fphone" placeholder="+228 XX XX XX XX" autocomplete="tel">
+      </div>
+      <div class="form-group full">
+        <label for="fsubject">Sujet</label>
+        <select id="fsubject">
+          <option value="">— Choisir —</option>
+          <option>Commande Football</option>
+          <option>Commande Basketball</option>
+          <option>Devis équipement club</option>
+          <option>Livraison hors Lomé</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="fmessage">Votre message</label>
+        <textarea id="fmessage" placeholder="Décrivez votre besoin (quantité, tailles, délai...)"></textarea>
+      </div>
+      <div class="form-group full">
+        <button class="btn-primary" onclick="sendContact()" style="width:100%;justify-content:center;font-size:1.1rem;padding:16px;">
+          📨 Envoyer le message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <!-- Badge cohérent avec le header -->
+      <div class="footer-logo-text">
+        <span class="fl-ts">TS</span><span class="fl-equip">ÉQUIPEMENTS</span>
+      </div>
+      <p>Leader en équipements Football &amp; Basketball au Togo. Matériel certifié, livraison rapide, service club.</p>
+      <p style="margin-top:16px;color:rgba(255,255,255,.2);font-size:.8rem;">© 2026 TS EQUIPEMENTS – Tous droits réservés</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <a href="pages/football.html">Catalogue Football</a>
+      <a href="pages/basketball.html">Catalogue Basketball</a>
+      <a href="#products">Produits Phares</a>
+      <a href="#bestsellers">Top Ventes</a>
+      <a href="#social">Activités Sociales</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div>
+      <h4>Lomé – Dagué</h4>
+      <p>📞 +228 92 74 74 64</p>
+      <p>📞 +228 98 69 68 61</p>
+    </div>
+    <div>
+      <h4>Vogan</h4>
+      <p>📞 +228 90 48 48 81</p>
+      <p>📞 +228 97 89 25 89</p>
+      <!-- FIX : email en clair -->
+      <p style="margin-top:10px;"><a href="mailto:contact@tsequipements.com">✉️ contact@tsequipements.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>TS EQUIPEMENTS – Togo / Afrique</span>
+    <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></span>
+  </div>
+</footer>
+
+<!-- ════════════ SCRIPTS ════════════ -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+/* ────────────────────────────────
+   UTILITAIRE : swap image avec fondu
+   ──────────────────────────────── */
+function swapImg(id, src, alt) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('img-fading');
+  setTimeout(function () {
+    el.src = src;
+    el.alt = alt || '';
+    el.classList.remove('img-fading');
+  }, 220);
+}
+
+/* ── 1. BALLON FIFA ── */
+var fifaMap = {
+  '3': { src: 'assets/Ballon de football taille 3 (enfant).png', alt: 'Ballon T3', name: 'Ballon FIFA – Taille 3 (Enfant)', desc: 'Ballon initiation T3, idéal pour les 5-8 ans',        price: '18 000 F CFA' },
+  '4': { src: 'assets/Ballon de football taille 4 (junior).png', alt: 'Ballon T4', name: 'Ballon FIFA – Taille 4 (Junior)', desc: 'Ballon compétition T4, pour joueurs 8-12 ans',       price: '20 000 F CFA' },
+  '5': { src: 'assets/Ballon de football taille 5 (match).png',  alt: 'Ballon T5', name: 'Ballon FIFA – Taille 5 (Match)',  desc: 'Ballon match officiel T5, homologué FIFA Basic',    price: '25 000 F CFA' }
+};
+function changeFifa(t) {
+  var d = fifaMap[t]; if (!d) return;
+  swapImg('img-fifa', d.src, d.alt);
+  document.getElementById('name-fifa').textContent  = d.name;
+  document.getElementById('desc-fifa').textContent  = d.desc;
+  document.getElementById('price-fifa').textContent = d.price;
+}
+
+/* ── 2. BALLON BASKETBALL ── */
+var baskMap = {
+  '5': { src: 'assets/bask ball taille 5 .png', alt: 'Ballon Basketball T5', name: 'Ballon Basketball – Taille 5', desc: 'Ballon T5 – Enfant / Mini Basketball, grip renforcé',           price: '20 000 F CFA' },
+  '6': { src: 'assets/bask ball taille 6 .png', alt: 'Ballon Basketball T6', name: 'Ballon Basketball – Taille 6', desc: 'Ballon officiel T6 – Femmes & Juniors, indoor & outdoor',       price: '25 000 F CFA' }
+};
+function changeBask(t) {
+  var d = baskMap[t]; if (!d) return;
+  swapImg('img-bask', d.src, d.alt);
+  document.getElementById('name-bask').textContent  = d.name;
+  document.getElementById('desc-bask').textContent  = d.desc;
+  document.getElementById('price-bask').textContent = d.price;
+}
+
+/* ── 3. CHAUSSURES FOOTBALL ── */
+var shoeMap = {
+  'Adidas Predator Elite':   { src: 'assets/Adidas Predator Elite.png',   alt: 'Adidas Predator Elite',    name: 'Adidas Predator Elite',    desc: 'Crampons terrain naturel & synthétique – contrôle exceptionnel', price: '12 000 F CFA', cls: 'pi-sq'   },
+  'adidas predator':         { src: 'assets/adidas predator.png',          alt: 'Adidas Predator Standard', name: 'Adidas Predator Standard', desc: 'Adhérence et précision sur terrain mixte',                        price: '13 000 F CFA', cls: 'pi-land' },
+  'Adidas X Speedportal':    { src: 'assets/Adidas X Speedportal.png',     alt: 'Adidas X Speedportal',     name: 'Adidas X Speedportal',     desc: 'Légèreté extrême pour attaquants – semelle Speedskin',            price: '14 000 F CFA', cls: 'pi-land' },
+  'Nike Air Zoom Mercurial': { src: 'assets/Nike Air Zoom Mercurial.png',  alt: 'Nike Air Zoom Mercurial',  name: 'Nike Air Zoom Mercurial',  desc: 'Vitesse et réactivité maximales – technologie Air Zoom',          price: '17 000 F CFA', cls: 'pi-land' },
+  'nike golden goose':       { src: 'assets/nike golden goose.png',        alt: 'Nike Golden Goose',        name: 'Nike Golden Goose',        desc: 'Style et performance sur tout terrain – toucher ballon premium',  price: '19 000 F CFA', cls: 'pi-land' }
+};
+function changeShoe(m) {
+  var d = shoeMap[m]; if (!d) return;
+  document.getElementById('wrap-shoe').className = d.cls;
+  swapImg('img-shoe', d.src, d.alt);
+  document.getElementById('name-shoe').textContent  = 'Chaussures Indoor/Outdoor – ' + d.name;
+  document.getElementById('desc-shoe').textContent  = d.name + ' – ' + d.desc;
+  document.getElementById('price-shoe').textContent = d.price;
+}
+
+/* ── 4. MAILLOT CLUB OFFICIEL ── */
+var jerseyMap = {
+  'adidas':              { src: 'assets/adidas.png',              alt: 'Maillot Adidas',         name: 'Maillot Club Officiel – Adidas',             desc: 'Maillot Adidas, tissu respirant, personnalisable',               price: '7 500 F CFA'  },
+  'adidas1':             { src: 'assets/adidas1.png',             alt: 'Maillot Adidas Premium', name: 'Maillot Club Officiel – Adidas Premium',     desc: 'Adidas haut de gamme, coupe athlétique',                        price: '8 000 F CFA'  },
+  'cma':                 { src: 'assets/cma.png',                 alt: 'Maillot CMA',            name: 'Maillot Club Officiel – CMA',                desc: 'CMA, confort optimal longue durée',                              price: '6 500 F CFA'  },
+  'emirates':            { src: 'assets/emirates.png',            alt: 'Maillot Emirates',       name: 'Maillot Club Officiel – Emirates',           desc: 'Emirates, style pro, tissu léger',                              price: '7 500 F CFA'  },
+  'italie 2':            { src: 'assets/italie 2.png',            alt: 'Maillot Italie 2',       name: 'Maillot Club Officiel – Italie 2',           desc: "Azzurri 2ème équipement, qualité premium",                      price: '8 500 F CFA'  },
+  'italie':              { src: 'assets/italie.png',              alt: 'Maillot Italie',         name: 'Maillot Club Officiel – Italie Classic',     desc: 'Azzurri classique, tissu respirant',                            price: '6 500 F CFA'  },
+  'nike':                { src: 'assets/nike.png',                alt: 'Maillot Nike',           name: 'Maillot Club Officiel – Nike',               desc: 'Nike Dri-FIT, technologie régulation thermique',                price: '9 500 F CFA'  },
+  'Olympique Marseille': { src: 'assets/Olympique Marseille.png', alt: 'Maillot OM',             name: 'Maillot Club Officiel – Olympique Marseille',desc: 'OM réplique, coupe pro, personnalisable',                       price: '7 500 F CFA'  },
+  'qatar':               { src: 'assets/qatar.png',               alt: 'Maillot Qatar',          name: 'Maillot Club Officiel – Qatar',              desc: 'Qatar Stars League, qualité officielle',                        price: '8 500 F CFA'  },
+  'ts equipements':      { src: 'assets/ts equipements.png',      alt: 'Maillot TS Equip',       name: 'Maillot Club Officiel – TS Equipements',     desc: 'Maillot TS exclusif, logo brodé, pour vos équipes locales',     price: '5 500 F CFA'  }
+};
+function changeJersey(m) {
+  var d = jerseyMap[m]; if (!d) return;
+  swapImg('img-jersey', d.src, d.alt);
+  document.getElementById('name-jersey').textContent  = d.name;
+  document.getElementById('desc-jersey').textContent  = d.desc;
+  document.getElementById('price-jersey').textContent = d.price;
+}
+
+/* ── 5. MAILLOTS CLUB ENSEMBLE ── */
+var clubMap = {
+  '1': { src: 'assets/Maillots CLUB 1.png', alt: 'Maillots CLUB 1', name: 'Maillots CLUB – Modèle 1', desc: 'Ensemble club modèle 1, tissu dry-fit, couleurs vives', price: '9 500 F CFA', cls: 'pi-sq'   },
+  '2': { src: 'assets/Maillots CLUB 2.png', alt: 'Maillots CLUB 2', name: 'Maillots CLUB – Modèle 2', desc: 'Ensemble club modèle 2, coupe moderne',                  price: '8 500 F CFA', cls: 'pi-sq'   },
+  '3': { src: 'assets/Maillots CLUB 3.png', alt: 'Maillots CLUB 3', name: 'Maillots CLUB – Modèle 3', desc: 'Ensemble club modèle 3, design sportif',                 price: '7 500 F CFA', cls: 'pi-sq'   },
+  'a': { src: 'assets/Maillots CLUB a.png', alt: 'Maillots CLUB A', name: 'Maillots CLUB – Modèle A', desc: 'Ensemble club modèle A, haute résistance',               price: '8 500 F CFA', cls: 'pi-land' },
+  'b': { src: 'assets/Maillots CLUB b.png', alt: 'Maillots CLUB B', name: 'Maillots CLUB – Modèle B', desc: 'Ensemble club modèle B, coupe slim athlétique',          price: '9 500 F CFA', cls: 'pi-land' }
+};
+function changeClub(v) {
+  var d = clubMap[v]; if (!d) return;
+  document.getElementById('wrap-club').className = d.cls;
+  swapImg('img-club', d.src, d.alt);
+  document.getElementById('name-club').textContent  = d.name;
+  document.getElementById('desc-club').textContent  = d.desc;
+  document.getElementById('price-club').textContent = d.price;
+}
+
+/* ── 6. SURVÊTEMENT ── */
+var survMap = {
+  'Blanc 1': { src: 'assets/Survêtement Blanc 1.png', name: 'Survêtement Blanc 1' },
+  'Blanc 2': { src: 'assets/Survêtement Blanc 2.png', name: 'Survêtement Blanc 2' },
+  'cendre':  { src: 'assets/Survêtement cendre.png',  name: 'Survêtement Cendré'  },
+  'Gris':    { src: 'assets/Survêtement Gris.png',    name: 'Survêtement Gris'    },
+  'Jaune':   { src: 'assets/Survêtement Jaune.png',   name: 'Survêtement Jaune'   },
+  'orange':  { src: 'assets/Survêtement orange.png',  name: 'Survêtement Orange'  },
+  'Rouge':   { src: 'assets/Survêtement Rouge.png',   name: 'Survêtement Rouge'   },
+  'Vert':    { src: 'assets/Survêtement Vert.png',    name: 'Survêtement Vert'    }
+};
+function changeSurv(key, dotEl, price) {
+  var d = survMap[key]; if (!d) return;
+  document.querySelectorAll('#dots-surv .color-dot').forEach(function (el) { el.classList.remove('active'); });
+  dotEl.classList.add('active');
+  swapImg('img-surv', d.src, d.name);
+  document.getElementById('name-surv').textContent  = d.name;
+  document.getElementById('price-surv').textContent = price.toLocaleString('fr-FR') + ' F CFA';
+}
+
+/* ── 7. MAILLOT BASKETBALL ── */
+var bmaillotPrices = { '1':8500,'2':8500,'3':7500,'4':8500,'5':7500,'6':6500,'7':7500,'8':7500,'9':7500,'10':6500,'11':8500,'12':7500 };
+function changeBMaillot(v) {
+  swapImg('img-bmaillot', 'assets/Maillot de basketball ' + v + '.png', 'Maillot Basketball N°' + v);
+  document.getElementById('name-bmaillot').textContent  = 'Maillot Basketball – N°' + v;
+  document.getElementById('price-bmaillot').textContent = (bmaillotPrices[v] || 7500).toLocaleString('fr-FR') + ' F CFA';
+}
+
+/* ── 8. CHRONOMÈTRE ── */
+var chronoMap = {
+  'd': { src: 'assets/Chronomètre shot clock d.png', alt: 'Shot Clock Doré',  name: 'Chronomètre Shot Clock – Doré',  price: '25 000 F CFA' },
+  'j': { src: 'assets/Chronomètre shot clock j.png', alt: 'Shot Clock Jaune', name: 'Chronomètre Shot Clock – Jaune', price: '30 000 F CFA' }
+};
+function changeChrono(v) {
+  var d = chronoMap[v]; if (!d) return;
+  swapImg('img-chrono', d.src, d.alt);
+  document.getElementById('name-chrono').textContent  = d.name;
+  document.getElementById('price-chrono').textContent = d.price;
+}
+
+/* ── 9. CÔNES ── */
+var coneMap = {
+  'std': { src: "assets/Cônes d'Entraînement 1.png", name: "Cônes d'Entraînement 1", price: '5 500 F CFA' },
+  '2':   { src: "assets/Cônes d'Entraînement 2.png", name: "Cônes d'Entraînement 2", price: '4 500 F CFA' },
+  '3':   { src: "assets/Cônes d'Entraînement 3.png", name: "Cônes d'Entraînement 3", price: '3 500 F CFA' },
+  '4':   { src: "assets/Cônes d'Entraînement 4.png", name: "Cônes d'Entraînement 4", price: '4 500 F CFA' },
+  '5':   { src: "assets/Cônes d'Entraînement 5.png", name: "Cônes d'Entraînement 5", price: '3 500 F CFA' }
+};
+function changeCone(v) {
+  var d = coneMap[v]; if (!d) return;
+  swapImg('img-cone', d.src, d.name);
+  document.getElementById('name-cone').textContent  = d.name;
+  document.getElementById('price-cone').textContent = d.price;
+}
+
+/* ── 10. GENOUILLÈRES ── */
+var kneeMap = {
+  '1': { src: 'assets/Genouillères KNEE 1.png', name: 'Genouillères KNEE – Modèle 1', price: '6 500 F CFA' },
+  '2': { src: 'assets/Genouillères KNEE 2.png', name: 'Genouillères KNEE – Modèle 2', price: '6 500 F CFA' },
+  'v': { src: 'assets/Genouillères KNEE v.png', name: 'Genouillères KNEE – Modèle V', price: '7 500 F CFA' },
+  'x': { src: 'assets/Genouillères KNEE x.png', name: 'Genouillères KNEE – Modèle X', price: '8 500 F CFA' }
+};
+function changeKnee(v) {
+  var d = kneeMap[v]; if (!d) return;
+  swapImg('img-knee', d.src, d.name);
+  document.getElementById('name-knee').textContent  = d.name;
+  document.getElementById('price-knee').textContent = d.price;
+}
+
+/* ────────────────────────────────
+   PANIER
+   ──────────────────────────────── */
+var cartCount = 0;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function () { t.classList.remove('show'); }, 2800);
+}
+document.querySelectorAll('.add').forEach(function (b) {
+  b.addEventListener('click', function () {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+    showToast('✔ Produit ajouté au panier !');
+  });
+});
+
+/* ────────────────────────────────
+   BURGER MENU
+   ──────────────────────────────── */
+var burger = document.getElementById('burger');
+var navEl   = document.getElementById('nav-links');
+burger.addEventListener('click', function () { navEl.classList.toggle('show'); });
+burger.addEventListener('keydown', function (e) { if (e.key === 'Enter') navEl.classList.toggle('show'); });
+
+/* ────────────────────────────────
+   CARTE LOMÉ
+   ──────────────────────────────── */
+var mapL = L.map('map-lome').setView([6.20425, 1.41072], 16);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapL);
+L.marker([6.20425, 1.41072], {
+  icon: L.divIcon({
+    html: '<div style="background:#0c7a38;color:#fff;padding:5px 10px;border-radius:4px;font-weight:700;font-size:.72rem;white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,.3)">📍 TS EQUIP – LOMÉ</div>',
+    className: '',
+    iconAnchor: [60, 28]
+  })
+}).addTo(mapL).bindPopup('<b>TS EQUIPEMENTS – Lomé</b><br>Dagué, Lomé – Togo<br>📞 +228 92 74 74 64').openPopup();
+
+/* ────────────────────────────────
+   CARTE VOGAN
+   ──────────────────────────────── */
+var mapV = L.map('map-vogan').setView([6.338885, 1.526184], 16);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapV);
+L.marker([6.338885, 1.526184], {
+  icon: L.divIcon({
+    html: '<div style="background:#064e24;color:#fff;padding:5px 10px;border-radius:4px;font-weight:700;font-size:.72rem;white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,.3)">📍 TS EQUIPEMENTS – VOGAN</div>',
+    className: '',
+    iconAnchor: [62, 28]
+  })
+}).addTo(mapV).bindPopup('<b>TS EQUIPEMENTS – Vogan</b><br>Vogan, Région Maritime – Togo<br>📞 +228 90 48 48 81').openPopup();
+
+/* ────────────────────────────────
+   FORMULAIRE → WhatsApp
+   ──────────────────────────────── */
+function sendContact() {
+  var name    = document.getElementById('fname').value.trim();
+  var phone   = document.getElementById('fphone').value.trim();
+  var subject = document.getElementById('fsubject').value;
+  var message = document.getElementById('fmessage').value.trim();
+  if (!name || !phone) {
+    showToast('⚠️ Veuillez renseigner nom et téléphone.');
+    return;
+  }
+  var text = encodeURIComponent(
+    'Bonjour TS EQUIPEMENTS !\n\n' +
+    '👤 ' + name + '\n' +
+    '📞 ' + phone + '\n' +
+    '📋 Sujet : ' + (subject || 'Non précisé') + '\n\n' +
+    '💬 ' + (message || '(Pas de message)')
+  );
+  window.open('https://wa.me/22892747464?text=' + text, '_blank');
+}
+</script>
+</body>
+</html>

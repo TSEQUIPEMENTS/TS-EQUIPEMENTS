@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>TS EQUIPEMENTS – Catalogue Football</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catalogue Football TS EQUIPEMENTS – Ballons FIFA, chaussures, maillots et équipements professionnels pour clubs et académies en Afrique.">
+<meta property="og:title" content="TS EQUIPEMENTS – Catalogue Football">
+<meta property="og:description" content="Équipements Football certifiés FIFA. Lomé & Vogan, Togo.">
+<meta property="og:image" content="../assets/logo-ts.png">
+<link rel="icon" href="../assets/logo-ts.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ══ IMAGES PRODUITS — tailles réelles assets, miroir exact index.html ══ */
+.pi-sq   { width:100%; height:206px; background:#f0f4f1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.pi-sq   img { width:206px; height:206px; object-fit:contain; transition:opacity .22s, transform .35s; }
+.pi-land { width:100%; height:155px; background:#f0f4f1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.pi-land img { width:100%; max-width:206px; height:155px; object-fit:contain; transition:opacity .22s, transform .35s; }
+.pi-sq img:hover, .pi-land img:hover { transform:scale(1.06); }
+.img-fading { opacity:0 !important; }
+
+/* ══ SÉLECTEUR MODÈLE — identique index.html ══ */
+.model-sel { display:flex; flex-direction:column; gap:3px; margin:5px 0; }
+.model-sel label { font-family:'Barlow Condensed',sans-serif; font-size:.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#64748b; }
+.model-sel select { padding:5px 8px; border-radius:4px; border:1px solid #dde3dd; font-size:.85rem; background:white; cursor:pointer; outline:none; }
+.model-sel select:focus { border-color:var(--green); }
+
+/* ══ COLOR DOTS SURVÊTEMENT — identique index.html ══ */
+.color-dots { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:6px 0; }
+.color-dot  { width:20px; height:20px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:transform .2s, border-color .2s; }
+.color-dot:hover, .color-dot.active { border-color:var(--green); transform:scale(1.2); }
+
+/* ══ HEADER LOGO BADGE — identique index.html ══ */
+.lt-ts {
+  background:#ffd400; color:#000;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:1rem; letter-spacing:2px;
+  padding:2px 7px; margin-right:5px;
+  display:inline-block; line-height:1.5;
+}
+.lt-equip {
+  color:#ffffff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:1.1rem; letter-spacing:3px;
+}
+
+/* ══ FOOTER LOGO BADGE — identique index.html ══ */
+.fl-ts  { background:#ffd400; color:#000; font-weight:900; padding:1px 6px; margin-right:4px; display:inline-block; }
+.fl-equip { color:#ffffff; letter-spacing:3px; }
+
+/* ══ COMPTEUR PRODUITS ══ */
+.cat-count {
+  text-align:center; margin-bottom:20px;
+  font-family:'Barlow Condensed',sans-serif; font-size:.85rem;
+  font-weight:700; letter-spacing:2px; color:var(--gray); text-transform:uppercase;
+}
+.cat-count span { color:var(--green); font-size:1.1rem; }
+
+/* ══ PAGE HERO h1 ══ */
+.page-hero h1 { color:white; }
+.page-hero h1 .accent { color:var(--green-neon); }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">✔ Produit ajouté au panier !</div>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <div class="logo-box">
+    <img src="../assets/logo-ts.png" alt="Logo TS EQUIPEMENTS">
+    <div class="logo-text">
+      <span class="lt-ts">TS</span><span class="lt-equip">EQUIPEMENTS</span>
+    </div>
+  </div>
+  <div class="burger" id="burger" role="button" tabindex="0" aria-label="Menu">
+    <div></div><div></div><div></div>
+  </div>
+  <nav>
+    <div class="nav-links" id="nav-links">
+      <a href="../index.html">🏠 Accueil</a>
+      <a href="football.html" class="active">⚽ Football</a>
+      <a href="basketball.html">🏀 Basketball</a>
+      <a href="../index.html#bestsellers">Top Ventes</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <button class="cart-btn" aria-label="Panier">🛒 Panier <span id="cart-count">0</span></button>
+  </nav>
+</header>
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('../assets/stade-football.jpg');background-position:center 35%;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <span class="hero-tag">⚽ Discipline — Football</span>
+    <h1>CATALOGUE<br><span class="accent">FOOTBALL</span></h1>
+    <p>Équipements professionnels certifiés FIFA pour clubs, académies et joueurs à travers l'Afrique.</p>
+    <div style="margin-top:28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a href="#catalogue" class="btn-primary">🏆 Voir les produits</a>
+      <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-whatsapp">💬 Commander WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STATS ════ -->
+<div class="stats-strip">
+  <div class="stat-item"><h3>50+</h3><p>Modèles Football</p></div>
+  <div class="stat-item"><h3>FIFA</h3><p>Homologué</p></div>
+  <div class="stat-item"><h3>15+</h3><p>Pays livrés</p></div>
+  <div class="stat-item"><h3>500+</h3><p>Clubs équipés</p></div>
+</div>
+
+<!-- ════ CATALOGUE ════ -->
+<section class="section" id="catalogue" style="background:white;">
+  <div class="section-header">
+    <span class="eyebrow">Équipements Football</span>
+    <h2>NOS <span>PRODUITS</span></h2>
+    <p>Sélection pro pour le terrain naturel, synthétique et en salle.</p>
+  </div>
+
+  <!-- FILTRES -->
+  <div class="filter-bar">
+    <select id="sort-sel" aria-label="Trier par">
+      <option value="default">Trier par popularité</option>
+      <option value="asc">Prix croissant</option>
+      <option value="desc">Prix décroissant</option>
+    </select>
+    <select id="cat-sel" aria-label="Catégorie">
+      <option value="all">Toutes catégories</option>
+      <option value="ballons">⚽ Ballons</option>
+      <option value="chaussures">👟 Chaussures</option>
+      <option value="maillots">👕 Maillots</option>
+      <option value="survetements">🏃 Survêtements</option>
+      <option value="accessoires">🎽 Accessoires</option>
+      <option value="entrainement">🏋️ Entraînement</option>
+    </select>
+  </div>
+
+  <p class="cat-count">Affichage : <span id="prod-count">13</span> produits</p>
+
+  <div class="product-grid" id="pgrid">
+
+    <!-- ── 1. BALLON FIFA (3 tailles) ── -->
+    <div class="product" data-category="ballons" data-price="25000">
+      <div class="badge new">FIFA</div>
+      <div class="pi-sq" id="wrap-fifa-f">
+        <img id="img-fifa-f"
+          src="../assets/Ballon de football taille 5 (match).png"
+          alt="Ballon FIFA Taille 5"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>⚽</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-fifa-f">Ballon FIFA – Taille 5 (Match)</h4>
+        <p id="desc-fifa-f">Ballon match officiel T5, homologué FIFA Basic</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select onchange="changeFifaF(this.value)">
+            <option value="3">Taille 3 – Enfant (18 000 F)</option>
+            <option value="4">Taille 4 – Junior (20 000 F)</option>
+            <option value="5" selected>Taille 5 – Match (25 000 F)</option>
+          </select>
+        </div>
+        <div class="price" id="price-fifa-f">25 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2. CHAUSSURES FOOTBALL (5 modèles) ── -->
+    <div class="product" data-category="chaussures" data-price="12000">
+      <div class="badge">TOP</div>
+      <div class="pi-sq" id="wrap-shoe-f">
+        <img id="img-shoe-f"
+          src="../assets/Adidas Predator Elite.png"
+          alt="Adidas Predator Elite"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👟</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-shoe-f">Chaussures Football – Adidas Predator Elite</h4>
+        <p id="desc-shoe-f">Crampons terrain naturel &amp; synthétique – contrôle de balle exceptionnel</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeShoeF(this.value)">
+            <option value="Adidas Predator Elite">Adidas Predator Elite — 12 000 F</option>
+            <option value="adidas predator">Adidas Predator Standard — 13 000 F</option>
+            <option value="Adidas X Speedportal">Adidas X Speedportal — 14 000 F</option>
+            <option value="Nike Air Zoom Mercurial">Nike Air Zoom Mercurial — 17 000 F</option>
+            <option value="nike golden goose">Nike Golden Goose — 19 000 F</option>
+          </select>
+        </div>
+        <div class="model-sel">
+          <label>Pointure</label>
+          <select>
+            <option>39</option><option>40</option><option>41</option>
+            <option>42</option><option>43</option><option>44</option><option>45</option>
+          </select>
+        </div>
+        <div class="price" id="price-shoe-f">12 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. MAILLOT CLUB OFFICIEL (10 modèles) ── -->
+    <div class="product" data-category="maillots" data-price="7500">
+      <div class="badge promo">PROMO</div>
+      <div class="pi-sq" id="wrap-jersey-f">
+        <img id="img-jersey-f"
+          src="../assets/adidas.png"
+          alt="Maillot Adidas"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-jersey-f">Maillot Club Officiel – Adidas</h4>
+        <p id="desc-jersey-f">Maillot Adidas, tissu respirant, personnalisable</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeJerseyF(this.value)">
+            <option value="adidas">Adidas — 7 500 F</option>
+            <option value="adidas1">Adidas Premium — 8 000 F</option>
+            <option value="cma">CMA — 6 500 F</option>
+            <option value="emirates">Emirates — 7 500 F</option>
+            <option value="italie 2">Italie 2 — 8 500 F</option>
+            <option value="italie">Italie Classic — 6 500 F</option>
+            <option value="nike">Nike — 9 500 F</option>
+            <option value="Olympique Marseille">Olympique Marseille — 7 500 F</option>
+            <option value="qatar">Qatar — 8 500 F</option>
+            <option value="ts equipements">TS Equipements — 5 500 F</option>
+          </select>
+        </div>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        </div>
+        <div class="price" id="price-jersey-f">7 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. MAILLOTS CLUB ENSEMBLE (5 modèles) ── -->
+    <div class="product" data-category="maillots" data-price="9500">
+      <div class="badge new">CLUB</div>
+      <div class="pi-sq" id="wrap-club-f">
+        <img id="img-club-f"
+          src="../assets/Maillots CLUB 1.png"
+          alt="Maillots CLUB 1"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-club-f">Maillots CLUB – Modèle 1</h4>
+        <p id="desc-club-f">Ensemble club professionnel, tissu dry-fit, couleurs vives</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeClubF(this.value)">
+            <option value="1">Maillots CLUB 1 — 9 500 F</option>
+            <option value="2">Maillots CLUB 2 — 8 500 F</option>
+            <option value="3">Maillots CLUB 3 — 7 500 F</option>
+            <option value="a">Maillots CLUB A — 8 500 F</option>
+            <option value="b">Maillots CLUB B — 9 500 F</option>
+          </select>
+        </div>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        </div>
+        <div class="price" id="price-club-f">9 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. SURVÊTEMENT (8 couleurs dots) ── -->
+    <div class="product" data-category="survetements" data-price="15500">
+      <div class="pi-sq">
+        <img id="img-surv-f"
+          src="../assets/Survêtement Blanc 1.png"
+          alt="Survêtement Blanc 1"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏃</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-surv-f">Survêtement Blanc 1</h4>
+        <p>Survêtement pro, coupe athlétique, matière respirante</p>
+        <div class="color-dots" id="dots-surv-f">
+          <div class="color-dot active" style="background:#f0ede8" title="Blanc 1"  onclick="changeSurvF('Blanc 1',this,15500)"></div>
+          <div class="color-dot"        style="background:#e0e0e0" title="Blanc 2"  onclick="changeSurvF('Blanc 2',this,16500)"></div>
+          <div class="color-dot"        style="background:#9e9e9e" title="Cendré"   onclick="changeSurvF('cendre',this,15000)"></div>
+          <div class="color-dot"        style="background:#616161" title="Gris"     onclick="changeSurvF('Gris',this,15000)"></div>
+          <div class="color-dot"        style="background:#ffd600" title="Jaune"    onclick="changeSurvF('Jaune',this,16000)"></div>
+          <div class="color-dot"        style="background:#e65100" title="Orange"   onclick="changeSurvF('orange',this,14500)"></div>
+          <div class="color-dot"        style="background:#c62828" title="Rouge"    onclick="changeSurvF('Rouge',this,15000)"></div>
+          <div class="color-dot"        style="background:#0c7a38" title="Vert"     onclick="changeSurvF('Vert',this,16500)"></div>
+        </div>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="price" id="price-surv-f">15 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 6. CÔNES D'ENTRAÎNEMENT (5 lots) ── -->
+    <div class="product" data-category="entrainement" data-price="5500">
+      <div class="pi-sq">
+        <img id="img-cone-f"
+          src="../assets/Cônes d'Entraînement 1.png"
+          alt="Cônes Entraînement"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🔶</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-cone-f">Cônes d'Entraînement – Lot Standard</h4>
+        <p>Cônes pro résistants UV, lot pour entraînements club et académies</p>
+        <div class="model-sel">
+          <label>Lot</label>
+          <select onchange="changeConeF(this.value)">
+            <option value="std">Lot Standard — 5 500 F</option>
+            <option value="2">Lot Compact 2 — 4 500 F</option>
+            <option value="3">Lot Compact 3 — 3 500 F</option>
+            <option value="4">Lot Pro 4 — 4 500 F</option>
+            <option value="5">Lot Pro 5 — 3 500 F</option>
+          </select>
+        </div>
+        <div class="price" id="price-cone-f">5 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 7. GENOUILLÈRES KNEE (4 modèles) ── -->
+    <div class="product" data-category="accessoires" data-price="6500">
+      <div class="pi-sq">
+        <img id="img-knee-f"
+          src="../assets/Genouillères KNEE 1.png"
+          alt="Genouillères KNEE 1"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🦵</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-knee-f">Genouillères KNEE – Modèle 1</h4>
+        <p>Protection genou pro, maintien optimal, confort sur toute la durée du match</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeKneeF(this.value)">
+            <option value="1">KNEE 1 — 6 500 F</option>
+            <option value="2">KNEE 2 — 6 500 F</option>
+            <option value="v">KNEE V — 7 500 F</option>
+            <option value="x">KNEE X — 8 500 F</option>
+          </select>
+        </div>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        </div>
+        <div class="price" id="price-knee-f">6 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 8. CHAUSSETTES FOOTBALL ── -->
+    <div class="product" data-category="accessoires" data-price="1500">
+      <div class="pi-sq">
+        <img src="../assets/chaussette.png"
+          alt="Chaussettes Football"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🧦</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Chaussettes Football</h4>
+        <p>Chaussettes hautes anti-glisse, compression légère, toutes tailles disponibles</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>35–38</option><option>39–42</option><option>43–46</option></select>
+        </div>
+        <div class="price">1 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 9. CHEVILLIÈRE ── -->
+    <div class="product" data-category="accessoires" data-price="4500">
+      <div class="pi-sq">
+        <img src="../assets/Chevillière.png"
+          alt="Chevillière de protection"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🦶</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Chevillière de Protection</h4>
+        <p>Maintien cheville renforcé, prévention des entorses, usage terrain</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        </div>
+        <div class="price">4 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 10. PIQUETS DE SLALOM ── -->
+    <div class="product" data-category="entrainement" data-price="4000">
+      <div class="pi-sq">
+        <img src="../assets/Piquets de slalom.png"
+          alt="Piquets de slalom"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🔰</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Piquets de Slalom</h4>
+        <p>Lot de piquets flexibles pour dribbles et agilité, résistants aux UV</p>
+        <div class="price">4 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 11. MAILLOTS & TENUES ── -->
+    <div class="product" data-category="maillots" data-price="12000">
+      <div class="pi-sq">
+        <img src="../assets/Maillots  Tenues.png"
+          alt="Maillots Tenues"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Maillots &amp; Tenues Complètes</h4>
+        <p>Ensemble maillot + short, personnalisable avec logo et numéro de club</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        </div>
+        <div class="price">12 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 12. ACCESSOIRES SPORTIFS ── -->
+    <div class="product" data-category="accessoires" data-price="25000">
+      <div class="pi-sq">
+        <img src="../assets/Accessoires sportero.png"
+          alt="Accessoires sportifs"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🎽</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Accessoires Sportifs</h4>
+        <p>Sacs de sport, sifflets arbitre, bouteilles réutilisables, gilets de marquage</p>
+        <div class="price">25 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 13. ÉQUIPEMENTS CLUB (sur devis) ── -->
+    <div class="product" data-category="entrainement" data-price="0">
+      <div class="pi-sq">
+        <img src="../assets/Équipements d'Entraînement.png"
+          alt="Équipements d'Entraînement"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏋️</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Équipements Club &amp; Académie</h4>
+        <p>Mannequins, filets de but, échelles d'agilité, buts pliables, plots</p>
+        <div class="price" style="color:var(--green); font-size:1rem;">Sur devis</div>
+        <div class="product-actions">
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Demander un devis</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /product-grid -->
+</section>
+
+<!-- ════ AVANTAGES ════ -->
+<div class="advantages-strip">
+  <div class="adv-item"><div class="adv-icon">🏅</div><h3>Certifié FIFA</h3><p>Matériel homologué</p></div>
+  <div class="adv-item"><div class="adv-icon">🚚</div><h3>Livraison Afrique</h3><p>Rapide &amp; sécurisée</p></div>
+  <div class="adv-item"><div class="adv-icon">📱</div><h3>Paiement Mobile</h3><p>Mobile Money &amp; Carte</p></div>
+  <div class="adv-item"><div class="adv-icon">🤝</div><h3>Support Clubs</h3><p>Accompagnement équipes</p></div>
+</div>
+
+<!-- ════ CTA COMMANDE GROUPÉE ════ -->
+<section style="background:var(--green); padding:60px 5%; text-align:center;">
+  <h2 style="color:white; font-size:clamp(1.6rem,4vw,2.5rem); margin-bottom:12px;">COMMANDE GROUPÉE POUR VOTRE CLUB ?</h2>
+  <p style="color:rgba(255,255,255,.8); max-width:500px; margin:0 auto 28px;">Devis personnalisé, livraison rapide, équipement complet pour toute l'équipe.</p>
+  <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-whatsapp" style="font-size:1.1rem; padding:16px 40px; display:inline-flex;">💬 Contacter via WhatsApp</a>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-text">
+        <span class="fl-ts">TS</span><span class="fl-equip">EQUIPEMENTS</span>
+      </div>
+      <p>Leader en équipements Football &amp; Basketball au Togo. Matériel certifié, livraison rapide, service club.</p>
+      <p style="margin-top:16px; color:rgba(255,255,255,.2); font-size:.8rem;">© 2026 TS EQUIPEMENTS – Tous droits réservés</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <a href="../index.html">Accueil</a>
+      <a href="football.html">Catalogue Football</a>
+      <a href="basketball.html">Catalogue Basketball</a>
+      <a href="../index.html#bestsellers">Top Ventes</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <div>
+      <h4>Lomé – Dagué</h4>
+      <p>📞 +228 92 74 74 64</p>
+      <p>📞 +228 98 69 68 61</p>
+    </div>
+    <div>
+      <h4>Vogan</h4>
+      <p>📞 +228 90 48 48 81</p>
+      <p>📞 +228 97 89 25 89</p>
+      <p style="margin-top:8px;"><a href="mailto:contact@tsequipements.com">✉️ contact@tsequipements.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>TS EQUIPEMENTS – Togo / Afrique</span>
+    <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></span>
+  </div>
+</footer>
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+/* ─── Utilitaire swap image avec fondu — identique index.html ─── */
+function swapImg(id, src, alt) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('img-fading');
+  setTimeout(function () {
+    el.src = src; el.alt = alt || '';
+    el.classList.remove('img-fading');
+  }, 220);
+}
+
+/* ─── 1. BALLON FIFA ─── */
+var fifaMapF = {
+  '3': { src: '../assets/Ballon de football taille 3 (enfant).png', alt: 'Ballon T3', name: 'Ballon FIFA – Taille 3 (Enfant)', desc: 'Ballon initiation T3, idéal pour les 5-8 ans',     price: '18 000 F CFA' },
+  '4': { src: '../assets/Ballon de football taille 4 (junior).png', alt: 'Ballon T4', name: 'Ballon FIFA – Taille 4 (Junior)', desc: 'Ballon compétition T4, pour joueurs 8-12 ans',    price: '20 000 F CFA' },
+  '5': { src: '../assets/Ballon de football taille 5 (match).png',  alt: 'Ballon T5', name: 'Ballon FIFA – Taille 5 (Match)',  desc: 'Ballon match officiel T5, homologué FIFA Basic',  price: '25 000 F CFA' }
+};
+function changeFifaF(t) {
+  var d = fifaMapF[t]; if (!d) return;
+  swapImg('img-fifa-f', d.src, d.alt);
+  document.getElementById('name-fifa-f').textContent  = d.name;
+  document.getElementById('desc-fifa-f').textContent  = d.desc;
+  document.getElementById('price-fifa-f').textContent = d.price;
+}
+
+/* ─── 2. CHAUSSURES FOOTBALL ─── */
+var shoeMapF = {
+  'Adidas Predator Elite':   { src: '../assets/Adidas Predator Elite.png',   alt: 'Adidas Predator Elite',    name: 'Chaussures Football – Adidas Predator Elite',    desc: 'Crampons terrain naturel & synthétique – contrôle exceptionnel',  price: '12 000 F CFA', cls: 'pi-sq'   },
+  'adidas predator':         { src: '../assets/adidas predator.png',          alt: 'Adidas Predator Standard', name: 'Chaussures Football – Adidas Predator Standard', desc: 'Adhérence et précision sur terrain mixte',                        price: '13 000 F CFA', cls: 'pi-land' },
+  'Adidas X Speedportal':    { src: '../assets/Adidas X Speedportal.png',     alt: 'Adidas X Speedportal',     name: 'Chaussures Football – Adidas X Speedportal',     desc: 'Légèreté extrême pour attaquants – semelle Speedskin',            price: '14 000 F CFA', cls: 'pi-land' },
+  'Nike Air Zoom Mercurial': { src: '../assets/Nike Air Zoom Mercurial.png',  alt: 'Nike Air Zoom Mercurial',  name: 'Chaussures Football – Nike Air Zoom Mercurial',  desc: 'Vitesse et réactivité maximales – technologie Air Zoom',          price: '17 000 F CFA', cls: 'pi-land' },
+  'nike golden goose':       { src: '../assets/nike golden goose.png',        alt: 'Nike Golden Goose',        name: 'Chaussures Football – Nike Golden Goose',        desc: 'Style et performance sur tout terrain – toucher ballon premium',  price: '19 000 F CFA', cls: 'pi-land' }
+};
+function changeShoeF(m) {
+  var d = shoeMapF[m]; if (!d) return;
+  document.getElementById('wrap-shoe-f').className = d.cls;
+  swapImg('img-shoe-f', d.src, d.alt);
+  document.getElementById('name-shoe-f').textContent  = d.name;
+  document.getElementById('desc-shoe-f').textContent  = d.desc;
+  document.getElementById('price-shoe-f').textContent = d.price;
+}
+
+/* ─── 3. MAILLOT CLUB OFFICIEL ─── */
+var jerseyMapF = {
+  'adidas':              { src: '../assets/adidas.png',              alt: 'Maillot Adidas',         name: 'Maillot Club Officiel – Adidas',              desc: 'Maillot Adidas, tissu respirant, personnalisable',              price: '7 500 F CFA'  },
+  'adidas1':             { src: '../assets/adidas1.png',             alt: 'Maillot Adidas Premium', name: 'Maillot Club Officiel – Adidas Premium',      desc: 'Adidas haut de gamme, coupe athlétique',                       price: '8 000 F CFA'  },
+  'cma':                 { src: '../assets/cma.png',                 alt: 'Maillot CMA',            name: 'Maillot Club Officiel – CMA',                 desc: 'CMA, confort optimal longue durée',                             price: '6 500 F CFA'  },
+  'emirates':            { src: '../assets/emirates.png',            alt: 'Maillot Emirates',       name: 'Maillot Club Officiel – Emirates',            desc: 'Emirates, style pro, tissu léger',                             price: '7 500 F CFA'  },
+  'italie 2':            { src: '../assets/italie 2.png',            alt: 'Maillot Italie 2',       name: 'Maillot Club Officiel – Italie 2',            desc: "Azzurri 2ème équipement, qualité premium",                     price: '8 500 F CFA'  },
+  'italie':              { src: '../assets/italie.png',              alt: 'Maillot Italie',         name: 'Maillot Club Officiel – Italie Classic',      desc: 'Azzurri classique, tissu respirant',                           price: '6 500 F CFA'  },
+  'nike':                { src: '../assets/nike.png',                alt: 'Maillot Nike',           name: 'Maillot Club Officiel – Nike',                desc: 'Nike Dri-FIT, technologie régulation thermique',               price: '9 500 F CFA'  },
+  'Olympique Marseille': { src: '../assets/Olympique Marseille.png', alt: 'Maillot OM',             name: 'Maillot Club Officiel – Olympique Marseille', desc: 'OM réplique, coupe pro, personnalisable',                      price: '7 500 F CFA'  },
+  'qatar':               { src: '../assets/qatar.png',               alt: 'Maillot Qatar',          name: 'Maillot Club Officiel – Qatar',               desc: 'Qatar Stars League, qualité officielle',                       price: '8 500 F CFA'  },
+  'ts equipements':      { src: '../assets/ts equipements.png',      alt: 'Maillot TS Equip',       name: 'Maillot Club Officiel – TS Equipements',      desc: 'Maillot TS exclusif, logo brodé, pour vos équipes locales',    price: '5 500 F CFA'  }
+};
+function changeJerseyF(m) {
+  var d = jerseyMapF[m]; if (!d) return;
+  swapImg('img-jersey-f', d.src, d.alt);
+  document.getElementById('name-jersey-f').textContent  = d.name;
+  document.getElementById('desc-jersey-f').textContent  = d.desc;
+  document.getElementById('price-jersey-f').textContent = d.price;
+}
+
+/* ─── 4. MAILLOTS CLUB ENSEMBLE ─── */
+var clubMapF = {
+  '1': { src: '../assets/Maillots CLUB 1.png', alt: 'CLUB 1', name: 'Maillots CLUB – Modèle 1', desc: 'Ensemble club modèle 1, tissu dry-fit, couleurs vives',  price: '9 500 F CFA', cls: 'pi-sq'   },
+  '2': { src: '../assets/Maillots CLUB 2.png', alt: 'CLUB 2', name: 'Maillots CLUB – Modèle 2', desc: 'Ensemble club modèle 2, coupe moderne',                  price: '8 500 F CFA', cls: 'pi-sq'   },
+  '3': { src: '../assets/Maillots CLUB 3.png', alt: 'CLUB 3', name: 'Maillots CLUB – Modèle 3', desc: 'Ensemble club modèle 3, design sportif',                 price: '7 500 F CFA', cls: 'pi-sq'   },
+  'a': { src: '../assets/Maillots CLUB a.png', alt: 'CLUB A', name: 'Maillots CLUB – Modèle A', desc: 'Ensemble club modèle A, haute résistance',               price: '8 500 F CFA', cls: 'pi-land' },
+  'b': { src: '../assets/Maillots CLUB b.png', alt: 'CLUB B', name: 'Maillots CLUB – Modèle B', desc: 'Ensemble club modèle B, coupe slim athlétique',          price: '9 500 F CFA', cls: 'pi-land' }
+};
+function changeClubF(v) {
+  var d = clubMapF[v]; if (!d) return;
+  document.getElementById('wrap-club-f').className = d.cls;
+  swapImg('img-club-f', d.src, d.alt);
+  document.getElementById('name-club-f').textContent  = d.name;
+  document.getElementById('desc-club-f').textContent  = d.desc;
+  document.getElementById('price-club-f').textContent = d.price;
+}
+
+/* ─── 5. SURVÊTEMENT ─── */
+var survMapF = {
+  'Blanc 1': { src: '../assets/Survêtement Blanc 1.png', name: 'Survêtement Blanc 1' },
+  'Blanc 2': { src: '../assets/Survêtement Blanc 2.png', name: 'Survêtement Blanc 2' },
+  'cendre':  { src: '../assets/Survêtement cendre.png',  name: 'Survêtement Cendré'  },
+  'Gris':    { src: '../assets/Survêtement Gris.png',    name: 'Survêtement Gris'    },
+  'Jaune':   { src: '../assets/Survêtement Jaune.png',   name: 'Survêtement Jaune'   },
+  'orange':  { src: '../assets/Survêtement orange.png',  name: 'Survêtement Orange'  },
+  'Rouge':   { src: '../assets/Survêtement Rouge.png',   name: 'Survêtement Rouge'   },
+  'Vert':    { src: '../assets/Survêtement Vert.png',    name: 'Survêtement Vert'    }
+};
+function changeSurvF(key, dotEl, price) {
+  var d = survMapF[key]; if (!d) return;
+  document.querySelectorAll('#dots-surv-f .color-dot').forEach(function (el) { el.classList.remove('active'); });
+  dotEl.classList.add('active');
+  swapImg('img-surv-f', d.src, d.name);
+  document.getElementById('name-surv-f').textContent  = d.name;
+  document.getElementById('price-surv-f').textContent = price.toLocaleString('fr-FR') + ' F CFA';
+}
+
+/* ─── 6. CÔNES D'ENTRAÎNEMENT ─── */
+var coneMapF = {
+  'std': { src: "../assets/Cônes d'Entraînement 1.png", name: "Cônes d'Entraînement – Lot Standard",  price: '5 500 F CFA' },
+  '2':   { src: "../assets/Cônes d'Entraînement 2.png", name: "Cônes d'Entraînement – Lot Compact 2", price: '4 500 F CFA' },
+  '3':   { src: "../assets/Cônes d'Entraînement 3.png", name: "Cônes d'Entraînement – Lot Compact 3", price: '3 500 F CFA' },
+  '4':   { src: "../assets/Cônes d'Entraînement 4.png", name: "Cônes d'Entraînement – Lot Pro 4",     price: '4 500 F CFA' },
+  '5':   { src: "../assets/Cônes d'Entraînement 5.png", name: "Cônes d'Entraînement – Lot Pro 5",     price: '3 500 F CFA' }
+};
+function changeConeF(v) {
+  var d = coneMapF[v]; if (!d) return;
+  swapImg('img-cone-f', d.src, d.name);
+  document.getElementById('name-cone-f').textContent  = d.name;
+  document.getElementById('price-cone-f').textContent = d.price;
+}
+
+/* ─── 7. GENOUILLÈRES KNEE ─── */
+var kneeMapF = {
+  '1': { src: '../assets/Genouillères KNEE 1.png', name: 'Genouillères KNEE – Modèle 1', price: '6 500 F CFA' },
+  '2': { src: '../assets/Genouillères KNEE 2.png', name: 'Genouillères KNEE – Modèle 2', price: '6 500 F CFA' },
+  'v': { src: '../assets/Genouillères KNEE v.png', name: 'Genouillères KNEE – Modèle V', price: '7 500 F CFA' },
+  'x': { src: '../assets/Genouillères KNEE x.png', name: 'Genouillères KNEE – Modèle X', price: '8 500 F CFA' }
+};
+function changeKneeF(v) {
+  var d = kneeMapF[v]; if (!d) return;
+  swapImg('img-knee-f', d.src, d.name);
+  document.getElementById('name-knee-f').textContent  = d.name;
+  document.getElementById('price-knee-f').textContent = d.price;
+}
+
+/* ─── PANIER ─── */
+var cartCount = 0;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function () { t.classList.remove('show'); }, 2800);
+}
+document.querySelectorAll('.add').forEach(function (b) {
+  b.addEventListener('click', function () {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+    showToast('✔ Produit ajouté au panier !');
+  });
+});
+
+/* ─── BURGER ─── */
+var burger = document.getElementById('burger');
+var navEl   = document.getElementById('nav-links');
+burger.addEventListener('click', function () { navEl.classList.toggle('show'); });
+burger.addEventListener('keydown', function (e) { if (e.key === 'Enter') navEl.classList.toggle('show'); });
+
+/* ─── FILTRES ─── */
+var sortSel = document.getElementById('sort-sel');
+var catSel  = document.getElementById('cat-sel');
+var grid    = document.getElementById('pgrid');
+function applyFilters() {
+  var cat   = catSel.value;
+  var sort  = sortSel.value;
+  var cards = Array.from(grid.querySelectorAll('.product'));
+  cards.forEach(function (c) {
+    c.style.display = (cat === 'all' || c.dataset.category === cat) ? '' : 'none';
+  });
+  var visible = cards.filter(function (c) { return c.style.display !== 'none'; });
+  visible.sort(function (a, b) {
+    if (sort === 'asc')  return +a.dataset.price - +b.dataset.price;
+    if (sort === 'desc') return +b.dataset.price - +a.dataset.price;
+    return 0;
+  });
+  visible.forEach(function (c) { grid.appendChild(c); });
+  document.getElementById('prod-count').textContent = visible.length;
+}
+sortSel.addEventListener('change', applyFilters);
+catSel.addEventListener('change',  applyFilters);
+</script>
+</body>
+</html>
