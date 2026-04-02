@@ -413,20 +413,20 @@
   <div class="product" data-price="12000">
     <div class="badge">TOP</div>
     <div class="pi-sq" id="wrap-shoe">
-      <img id="img-shoe" src="assets/Adidas Predator Elite.png" alt="Adidas Predator Elite"
+      <img id="img-shoe" src="assets/nike golden goose.png" alt="nike golden goose"
         onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👟</span>'">
     </div>
     <div class="product-body">
       <h4 id="name-shoe">Chaussures Indoor/Outdoor – Football</h4>
-      <p id="desc-shoe">Adidas Predator Elite – crampons terrain naturel &amp; synthétique</p>
+      <p id="desc-shoe">nike golden goose – crampons terrain naturel &amp; synthétique</p>
       <div class="model-sel">
         <label>Modèle</label>
         <select onchange="changeShoe(this.value)">
-          <option value="Adidas Predator Elite">Adidas Predator Elite (12 000 F)</option>
+          <option value="nike golden goose">nike golden goose (12 000 F)</option>
           <option value="adidas predator">Adidas Predator Standard (13 000 F)</option>
           <option value="Adidas X Speedportal">Adidas X Speedportal (14 000 F)</option>
           <option value="Nike Air Zoom Mercurial">Nike Air Zoom Mercurial (17 000 F)</option>
-          <option value="nike golden goose">Nike Golden Goose (19 000 F)</option>
+          <option value="Adidas Predator Elite">Adidas Predator Elite (19 000 F)</option>
         </select>
       </div>
       <div class="model-sel">
@@ -493,7 +493,7 @@
   <div class="product" data-price="9500">
     <div class="badge new">CLUB</div>
     <div class="pi-sq" id="wrap-club">
-      <img id="img-club" src="assets/Maillots CLUB 1.png" alt="Maillots CLUB 1"
+      <img id="img-club" src="assets/Maillots CLUB 2.png" alt="Maillots CLUB 2"
         onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
     </div>
     <div class="product-body">
@@ -502,8 +502,8 @@
       <div class="model-sel">
         <label>Modèle</label>
         <select onchange="changeClub(this.value)">
-          <option value="1">Maillots CLUB 1 (9 500 F)</option>
-          <option value="2">Maillots CLUB 2 (8 500 F)</option>
+          <option value="1">Maillots CLUB 2 (9 500 F)</option>
+          <option value="2">Maillots CLUB 1 (8 500 F)</option>
           <option value="3">Maillots CLUB 3 (7 500 F)</option>
           <option value="a">Maillots CLUB A (8 500 F)</option>
           <option value="b">Maillots CLUB B (9 500 F)</option>
@@ -1738,11 +1738,11 @@ function changeBask(t) {
 
 /* ── 3. CHAUSSURES FOOTBALL ── */
 var shoeMap = {
-  'Adidas Predator Elite':   { src: 'assets/Adidas Predator Elite.png',   alt: 'Adidas Predator Elite',    name: 'Adidas Predator Elite',    desc: 'Crampons terrain naturel & synthétique – contrôle exceptionnel', price: '12 000 F CFA', cls: 'pi-sq'   },
+  'nike golden goose':   { src: 'assets/nike golden goose.png',   alt: 'nike golden goose',    name: 'nike golden goose',    desc: 'Crampons terrain naturel & synthétique – contrôle exceptionnel', price: '12 000 F CFA', cls: 'pi-sq'   },
   'adidas predator':         { src: 'assets/adidas predator.png',          alt: 'Adidas Predator Standard', name: 'Adidas Predator Standard', desc: 'Adhérence et précision sur terrain mixte',                        price: '13 000 F CFA', cls: 'pi-land' },
   'Adidas X Speedportal':    { src: 'assets/Adidas X Speedportal.png',     alt: 'Adidas X Speedportal',     name: 'Adidas X Speedportal',     desc: 'Légèreté extrême pour attaquants – semelle Speedskin',            price: '14 000 F CFA', cls: 'pi-land' },
   'Nike Air Zoom Mercurial': { src: 'assets/Nike Air Zoom Mercurial.png',  alt: 'Nike Air Zoom Mercurial',  name: 'Nike Air Zoom Mercurial',  desc: 'Vitesse et réactivité maximales – technologie Air Zoom',          price: '17 000 F CFA', cls: 'pi-land' },
-  'nike golden goose':       { src: 'assets/nike golden goose.png',        alt: 'Nike Golden Goose',        name: 'Nike Golden Goose',        desc: 'Style et performance sur tout terrain – toucher ballon premium',  price: '19 000 F CFA', cls: 'pi-land' }
+  'Adidas Predator Elite':       { src: 'assets/Adidas Predator Elite.png',        alt: 'Adidas Predator Elite',        name: 'Adidas Predator Elite',        desc: 'Style et performance sur tout terrain – toucher ballon premium',  price: '19 000 F CFA', cls: 'pi-land' }
 };
 function changeShoe(m) {
   var d = shoeMap[m]; if (!d) return;
@@ -1776,8 +1776,8 @@ function changeJersey(m) {
 
 /* ── 5. MAILLOTS CLUB ENSEMBLE ── */
 var clubMap = {
-  '1': { src: 'assets/Maillots CLUB 1.png', alt: 'Maillots CLUB 1', name: 'Maillots CLUB – Modèle 1', desc: 'Ensemble club modèle 1, tissu dry-fit, couleurs vives', price: '9 500 F CFA', cls: 'pi-sq'   },
-  '2': { src: 'assets/Maillots CLUB 2.png', alt: 'Maillots CLUB 2', name: 'Maillots CLUB – Modèle 2', desc: 'Ensemble club modèle 2, coupe moderne',                  price: '8 500 F CFA', cls: 'pi-sq'   },
+  '1': { src: 'assets/Maillots CLUB 2.png', alt: 'Maillots CLUB 2', name: 'Maillots CLUB – Modèle 1', desc: 'Ensemble club modèle 1, tissu dry-fit, couleurs vives', price: '9 500 F CFA', cls: 'pi-sq'   },
+  '2': { src: 'assets/Maillots CLUB 1.png', alt: 'Maillots CLUB 1', name: 'Maillots CLUB – Modèle 2', desc: 'Ensemble club modèle 2, coupe moderne',                  price: '8 500 F CFA', cls: 'pi-sq'   },
   '3': { src: 'assets/Maillots CLUB 3.png', alt: 'Maillots CLUB 3', name: 'Maillots CLUB – Modèle 3', desc: 'Ensemble club modèle 3, design sportif',                 price: '7 500 F CFA', cls: 'pi-sq'   },
   'a': { src: 'assets/Maillots CLUB a.png', alt: 'Maillots CLUB A', name: 'Maillots CLUB – Modèle A', desc: 'Ensemble club modèle A, haute résistance',               price: '8 500 F CFA', cls: 'pi-land' },
   'b': { src: 'assets/Maillots CLUB b.png', alt: 'Maillots CLUB B', name: 'Maillots CLUB – Modèle B', desc: 'Ensemble club modèle B, coupe slim athlétique',          price: '9 500 F CFA', cls: 'pi-land' }
