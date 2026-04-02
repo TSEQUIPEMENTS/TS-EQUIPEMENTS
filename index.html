@@ -51,6 +51,53 @@
 .bs-img img{width:180px;height:180px;object-fit:contain;}
 .bs-label{padding:10px 12px;font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:center;}
 
+/* ── GODASSES (SNEAKERS) SECTION ── */
+.godasses-section{background:#0d0d0d;padding:80px 0;overflow:hidden;}
+.godasses-section .section-header{padding:0 5%;}
+.godasses-section .section-header .eyebrow{color:#ff4d00;}
+.godasses-section .section-header h2{color:white;}
+.godasses-section .section-header h2 span{color:#ff4d00;}
+.godasses-section .section-header p{color:rgba(255,255,255,.5);}
+
+/* Brand filter tabs */
+.brand-tabs{display:flex;justify-content:center;gap:12px;margin-top:36px;padding:0 5%;flex-wrap:wrap;}
+.brand-tab{display:flex;align-items:center;gap:8px;padding:10px 24px;border-radius:50px;border:2px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.brand-tab:hover{border-color:rgba(255,77,0,.5);color:rgba(255,255,255,.8);}
+.brand-tab.active{border-color:#ff4d00;background:#ff4d00;color:white;}
+.brand-tab .tab-count{background:rgba(255,255,255,.2);border-radius:20px;padding:2px 8px;font-size:.75rem;}
+.brand-tab.active .tab-count{background:rgba(0,0,0,.25);}
+
+/* Sneaker scroll track */
+.shoe-scroll-wrap{position:relative;margin-top:36px;overflow:hidden;}
+.shoe-scroll-wrap::before,.shoe-scroll-wrap::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+.shoe-scroll-wrap::before{left:0;background:linear-gradient(to right,#0d0d0d,transparent);}
+.shoe-scroll-wrap::after{right:0;background:linear-gradient(to left,#0d0d0d,transparent);}
+
+.shoe-track{display:flex;gap:18px;padding:12px 50px;width:max-content;transition:none;}
+.shoe-track.animate-adidas{animation:shoeScroll 55s linear infinite;}
+.shoe-track.animate-nike{animation:shoeScroll 48s linear infinite;}
+.shoe-track.animate-puma{animation:shoeScroll 28s linear infinite;}
+.shoe-track:hover{animation-play-state:paused;}
+@keyframes shoeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.shoe-card{flex-shrink:0;width:200px;background:#181818;border-radius:12px;overflow:hidden;border:1px solid rgba(255,77,0,.12);transition:border-color .3s,transform .3s;cursor:pointer;}
+.shoe-card:hover{border-color:rgba(255,77,0,.6);transform:translateY(-5px);}
+.shoe-img{width:200px;height:200px;background:#111;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.shoe-img img{width:200px;height:200px;object-fit:contain;transition:transform .4s;}
+.shoe-card:hover .shoe-img img{transform:scale(1.08);}
+.shoe-card-body{padding:10px 12px 14px;}
+.shoe-brand-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:6px;}
+.shoe-brand-badge.adidas{background:rgba(0,180,255,.15);color:#00b4ff;}
+.shoe-brand-badge.nike{background:rgba(255,60,0,.15);color:#ff3c00;}
+.shoe-brand-badge.puma{background:rgba(0,220,100,.15);color:#00dc64;}
+.shoe-name{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3;}
+.shoe-cta{margin-top:8px;width:100%;padding:7px 0;border:none;border-radius:6px;background:#ff4d00;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:1px;cursor:pointer;transition:background .2s;}
+.shoe-cta:hover{background:#ffd400;color:#000;}
+
+/* hidden tracks */
+.shoe-track[data-brand]{display:none;}
+.shoe-track[data-brand].active-track{display:flex;}
+
 /* ── SOCIAL STRIP ── */
 .social-section{background:#f0f5f1;padding:80px 0;overflow:hidden;}
 .social-section .section-header{padding:0 5%;}
@@ -271,6 +318,7 @@
       <a href="pages/basketball.html">🏀 Basketball</a>
       <a href="#products">Produits</a>
       <a href="#bestsellers">Top Ventes</a>
+      <a href="#godasses">👟 Godasses</a>
       <a href="#social">Social</a>
       <a href="#galerie-ts">Galerie TS</a>
       <a href="#contact">Contact</a>
@@ -413,20 +461,20 @@
   <div class="product" data-price="12000">
     <div class="badge">TOP</div>
     <div class="pi-sq" id="wrap-shoe">
-      <img id="img-shoe" src="assets/nike golden goose.png" alt="nike golden goose"
+      <img id="img-shoe" src="assets/Adidas Predator Elite.png" alt="Adidas Predator Elite"
         onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👟</span>'">
     </div>
     <div class="product-body">
       <h4 id="name-shoe">Chaussures Indoor/Outdoor – Football</h4>
-      <p id="desc-shoe">nike golden goose – crampons terrain naturel &amp; synthétique</p>
+      <p id="desc-shoe">Adidas Predator Elite – crampons terrain naturel &amp; synthétique</p>
       <div class="model-sel">
         <label>Modèle</label>
         <select onchange="changeShoe(this.value)">
-          <option value="nike golden goose">nike golden goose (12 000 F)</option>
+          <option value="Adidas Predator Elite">Adidas Predator Elite (12 000 F)</option>
           <option value="adidas predator">Adidas Predator Standard (13 000 F)</option>
           <option value="Adidas X Speedportal">Adidas X Speedportal (14 000 F)</option>
           <option value="Nike Air Zoom Mercurial">Nike Air Zoom Mercurial (17 000 F)</option>
-          <option value="Adidas Predator Elite">Adidas Predator Elite (19 000 F)</option>
+          <option value="nike golden goose">Nike Golden Goose (19 000 F)</option>
         </select>
       </div>
       <div class="model-sel">
@@ -493,7 +541,7 @@
   <div class="product" data-price="9500">
     <div class="badge new">CLUB</div>
     <div class="pi-sq" id="wrap-club">
-      <img id="img-club" src="assets/Maillots CLUB 2.png" alt="Maillots CLUB 2"
+      <img id="img-club" src="assets/Maillots CLUB 1.png" alt="Maillots CLUB 1"
         onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
     </div>
     <div class="product-body">
@@ -502,8 +550,8 @@
       <div class="model-sel">
         <label>Modèle</label>
         <select onchange="changeClub(this.value)">
-          <option value="1">Maillots CLUB 2 (9 500 F)</option>
-          <option value="2">Maillots CLUB 1 (8 500 F)</option>
+          <option value="1">Maillots CLUB 1 (9 500 F)</option>
+          <option value="2">Maillots CLUB 2 (8 500 F)</option>
           <option value="3">Maillots CLUB 3 (7 500 F)</option>
           <option value="a">Maillots CLUB A (8 500 F)</option>
           <option value="b">Maillots CLUB B (9 500 F)</option>
@@ -809,6 +857,131 @@
   </div>
   <div style="text-align:center;margin-top:36px;">
     <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;">💬 Commander via WhatsApp</a>
+  </div>
+</section>
+
+<!-- ══ GODASSES – CHAUSSURES DE SPORT ══ -->
+<section class="godasses-section" id="godasses">
+  <div class="section-header">
+    <span class="eyebrow">👟 Sneakers & Crampons</span>
+    <h2>NOS <span>GODASSES</span> DE SPORT</h2>
+    <p>Adidas, Nike, Puma — filtrez par marque et trouvez la paire qui vous correspond</p>
+  </div>
+
+  <!-- Onglets marques -->
+  <div class="brand-tabs">
+    <button class="brand-tab active" data-target="adidas" onclick="switchBrand('adidas',this)">
+      <span>⚡ Adidas</span>
+      <span class="tab-count">18</span>
+    </button>
+    <button class="brand-tab" data-target="nike" onclick="switchBrand('nike',this)">
+      <span>✔ Nike</span>
+      <span class="tab-count">14</span>
+    </button>
+    <button class="brand-tab" data-target="puma" onclick="switchBrand('puma',this)">
+      <span>🐆 Puma</span>
+      <span class="tab-count">6</span>
+    </button>
+  </div>
+
+  <!-- ── TRACK ADIDAS ── -->
+  <div class="shoe-scroll-wrap">
+    <div class="shoe-track animate-adidas active-track" data-brand="adidas" id="track-adidas">
+      <!-- 18 paires Adidas originales -->
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (1).png" alt="Adidas 1" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°1</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°1')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (2).png" alt="Adidas 2" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°2</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°2')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (3).png" alt="Adidas 3" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°3</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°3')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (4).png" alt="Adidas 4" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°4</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°4')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (5).png" alt="Adidas 5" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°5</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°5')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (6).png" alt="Adidas 6" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°6</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°6')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (7).png" alt="Adidas 7" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°7</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°7')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (8).png" alt="Adidas 8" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°8</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°8')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (9).png" alt="Adidas 9" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°9</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°9')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (10).png" alt="Adidas 10" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°10</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°10')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (11).png" alt="Adidas 11" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°11</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°11')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (12).png" alt="Adidas 12" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°12</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°12')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (13).png" alt="Adidas 13" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°13</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°13')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (14).png" alt="Adidas 14" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°14</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°14')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (15).png" alt="Adidas 15" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°15</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°15')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (16).png" alt="Adidas 16" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°16</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°16')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (17).png" alt="Adidas 17" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°17</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°17')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (18).png" alt="Adidas 18" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°18</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°18')">🛒 Commander</button></div></div>
+      <!-- Duplicata seamless pour boucle infinie -->
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (1).png" alt="Adidas 1"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°1</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°1')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (2).png" alt="Adidas 2"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°2</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°2')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (3).png" alt="Adidas 3"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°3</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°3')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (4).png" alt="Adidas 4"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°4</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°4')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (5).png" alt="Adidas 5"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°5</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°5')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (6).png" alt="Adidas 6"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°6</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°6')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (7).png" alt="Adidas 7"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°7</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°7')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (8).png" alt="Adidas 8"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°8</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°8')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (9).png" alt="Adidas 9"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°9</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°9')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (10).png" alt="Adidas 10"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°10</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°10')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (11).png" alt="Adidas 11"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°11</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°11')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (12).png" alt="Adidas 12"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°12</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°12')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (13).png" alt="Adidas 13"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°13</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°13')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (14).png" alt="Adidas 14"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°14</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°14')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (15).png" alt="Adidas 15"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°15</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°15')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (16).png" alt="Adidas 16"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°16</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°16')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (17).png" alt="Adidas 17"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°17</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°17')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/ADIDAS (18).png" alt="Adidas 18"></div><div class="shoe-card-body"><span class="shoe-brand-badge adidas">Adidas</span><div class="shoe-name">Modèle N°18</div><button class="shoe-cta" onclick="addShoeToCart('Adidas – Modèle N°18')">🛒 Commander</button></div></div>
+    </div>
+
+    <!-- ── TRACK NIKE ── -->
+    <div class="shoe-track animate-nike" data-brand="nike" id="track-nike">
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (1).png" alt="Nike 1" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°1</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°1')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (2).png" alt="Nike 2" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°2</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°2')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (3).png" alt="Nike 3" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°3</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°3')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (4).png" alt="Nike 4" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°4</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°4')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (5).png" alt="Nike 5" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°5</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°5')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (6).png" alt="Nike 6" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°6</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°6')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (7).png" alt="Nike 7" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°7</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°7')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (8).png" alt="Nike 8" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°8</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°8')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (9).png" alt="Nike 9" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°9</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°9')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (10).png" alt="Nike 10" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°10</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°10')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (11).png" alt="Nike 11" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°11</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°11')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (12).png" alt="Nike 12" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°12</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°12')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (13).png" alt="Nike 13" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°13</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°13')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (14).png" alt="Nike 14" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°14</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°14')">🛒 Commander</button></div></div>
+      <!-- Duplicata seamless -->
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (1).png" alt="Nike 1"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°1</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°1')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (2).png" alt="Nike 2"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°2</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°2')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (3).png" alt="Nike 3"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°3</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°3')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (4).png" alt="Nike 4"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°4</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°4')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (5).png" alt="Nike 5"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°5</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°5')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (6).png" alt="Nike 6"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°6</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°6')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (7).png" alt="Nike 7"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°7</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°7')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (8).png" alt="Nike 8"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°8</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°8')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (9).png" alt="Nike 9"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°9</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°9')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (10).png" alt="Nike 10"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°10</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°10')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (11).png" alt="Nike 11"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°11</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°11')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (12).png" alt="Nike 12"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°12</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°12')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (13).png" alt="Nike 13"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°13</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°13')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/NIKE (14).png" alt="Nike 14"></div><div class="shoe-card-body"><span class="shoe-brand-badge nike">Nike</span><div class="shoe-name">Modèle N°14</div><button class="shoe-cta" onclick="addShoeToCart('Nike – Modèle N°14')">🛒 Commander</button></div></div>
+    </div>
+
+    <!-- ── TRACK PUMA ── -->
+    <div class="shoe-track animate-puma" data-brand="puma" id="track-puma">
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (1).png" alt="Puma 1" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°1</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°1')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (2).png" alt="Puma 2" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°2</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°2')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (3).png" alt="Puma 3" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°3</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°3')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (4).png" alt="Puma 4" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°4</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°4')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (5).png" alt="Puma 5" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°5</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°5')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (6).png" alt="Puma 6" onerror="this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.4>👟</span>'"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°6</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°6')">🛒 Commander</button></div></div>
+      <!-- Duplicata seamless ×4 pour Puma (6 items, besoin d'allonger la boucle) -->
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (1).png" alt="Puma 1"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°1</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°1')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (2).png" alt="Puma 2"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°2</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°2')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (3).png" alt="Puma 3"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°3</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°3')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (4).png" alt="Puma 4"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°4</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°4')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (5).png" alt="Puma 5"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°5</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°5')">🛒 Commander</button></div></div>
+      <div class="shoe-card"><div class="shoe-img"><img src="assets/puma (6).png" alt="Puma 6"></div><div class="shoe-card-body"><span class="shoe-brand-badge puma">Puma</span><div class="shoe-name">Modèle N°6</div><button class="shoe-cta" onclick="addShoeToCart('Puma – Modèle N°6')">🛒 Commander</button></div></div>
+    </div>
+  </div><!-- /shoe-scroll-wrap -->
+
+  <div style="text-align:center;margin-top:40px;">
+    <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;background:#ff4d00;border-color:#ff4d00;">
+      👟 Commander vos godasses sur WhatsApp
+    </a>
   </div>
 </section>
 
@@ -1738,11 +1911,11 @@ function changeBask(t) {
 
 /* ── 3. CHAUSSURES FOOTBALL ── */
 var shoeMap = {
-  'nike golden goose':   { src: 'assets/nike golden goose.png',   alt: 'nike golden goose',    name: 'nike golden goose',    desc: 'Crampons terrain naturel & synthétique – contrôle exceptionnel', price: '12 000 F CFA', cls: 'pi-sq'   },
+  'Adidas Predator Elite':   { src: 'assets/Adidas Predator Elite.png',   alt: 'Adidas Predator Elite',    name: 'Adidas Predator Elite',    desc: 'Crampons terrain naturel & synthétique – contrôle exceptionnel', price: '12 000 F CFA', cls: 'pi-sq'   },
   'adidas predator':         { src: 'assets/adidas predator.png',          alt: 'Adidas Predator Standard', name: 'Adidas Predator Standard', desc: 'Adhérence et précision sur terrain mixte',                        price: '13 000 F CFA', cls: 'pi-land' },
   'Adidas X Speedportal':    { src: 'assets/Adidas X Speedportal.png',     alt: 'Adidas X Speedportal',     name: 'Adidas X Speedportal',     desc: 'Légèreté extrême pour attaquants – semelle Speedskin',            price: '14 000 F CFA', cls: 'pi-land' },
   'Nike Air Zoom Mercurial': { src: 'assets/Nike Air Zoom Mercurial.png',  alt: 'Nike Air Zoom Mercurial',  name: 'Nike Air Zoom Mercurial',  desc: 'Vitesse et réactivité maximales – technologie Air Zoom',          price: '17 000 F CFA', cls: 'pi-land' },
-  'Adidas Predator Elite':       { src: 'assets/Adidas Predator Elite.png',        alt: 'Adidas Predator Elite',        name: 'Adidas Predator Elite',        desc: 'Style et performance sur tout terrain – toucher ballon premium',  price: '19 000 F CFA', cls: 'pi-land' }
+  'nike golden goose':       { src: 'assets/nike golden goose.png',        alt: 'Nike Golden Goose',        name: 'Nike Golden Goose',        desc: 'Style et performance sur tout terrain – toucher ballon premium',  price: '19 000 F CFA', cls: 'pi-land' }
 };
 function changeShoe(m) {
   var d = shoeMap[m]; if (!d) return;
@@ -1776,8 +1949,8 @@ function changeJersey(m) {
 
 /* ── 5. MAILLOTS CLUB ENSEMBLE ── */
 var clubMap = {
-  '1': { src: 'assets/Maillots CLUB 2.png', alt: 'Maillots CLUB 2', name: 'Maillots CLUB – Modèle 1', desc: 'Ensemble club modèle 1, tissu dry-fit, couleurs vives', price: '9 500 F CFA', cls: 'pi-sq'   },
-  '2': { src: 'assets/Maillots CLUB 1.png', alt: 'Maillots CLUB 1', name: 'Maillots CLUB – Modèle 2', desc: 'Ensemble club modèle 2, coupe moderne',                  price: '8 500 F CFA', cls: 'pi-sq'   },
+  '1': { src: 'assets/Maillots CLUB 1.png', alt: 'Maillots CLUB 1', name: 'Maillots CLUB – Modèle 1', desc: 'Ensemble club modèle 1, tissu dry-fit, couleurs vives', price: '9 500 F CFA', cls: 'pi-sq'   },
+  '2': { src: 'assets/Maillots CLUB 2.png', alt: 'Maillots CLUB 2', name: 'Maillots CLUB – Modèle 2', desc: 'Ensemble club modèle 2, coupe moderne',                  price: '8 500 F CFA', cls: 'pi-sq'   },
   '3': { src: 'assets/Maillots CLUB 3.png', alt: 'Maillots CLUB 3', name: 'Maillots CLUB – Modèle 3', desc: 'Ensemble club modèle 3, design sportif',                 price: '7 500 F CFA', cls: 'pi-sq'   },
   'a': { src: 'assets/Maillots CLUB a.png', alt: 'Maillots CLUB A', name: 'Maillots CLUB – Modèle A', desc: 'Ensemble club modèle A, haute résistance',               price: '8 500 F CFA', cls: 'pi-land' },
   'b': { src: 'assets/Maillots CLUB b.png', alt: 'Maillots CLUB B', name: 'Maillots CLUB – Modèle B', desc: 'Ensemble club modèle B, coupe slim athlétique',          price: '9 500 F CFA', cls: 'pi-land' }
@@ -2098,7 +2271,40 @@ function sendCartWhatsApp() {
   window.open('https://wa.me/22892747464?text=' + encodeURIComponent(txt), '_blank');
 }
 
-/* Fermer avec Escape */
+/* ── GODASSES – Filtre par marque ── */
+function switchBrand(brand, btn) {
+  // Update tab buttons
+  document.querySelectorAll('.brand-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  // Show/hide tracks
+  document.querySelectorAll('.shoe-track[data-brand]').forEach(function(tr){
+    tr.classList.remove('active-track');
+  });
+  var target = document.getElementById('track-' + brand);
+  if (target) target.classList.add('active-track');
+}
+
+/* Ajouter une chaussure au panier */
+function addShoeToCart(name) {
+  var found = false;
+  for (var i = 0; i < window._tsCart.length; i++) {
+    if (window._tsCart[i].name === name && window._tsCart[i].isProduct) {
+      window._tsCart[i].qty += 1;
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    window._tsCart.push({ productKey: 'shoe-' + Date.now(), name: name, price: 'Sur devis', qty: 1, isProduct: true });
+  }
+  window._cartCount += 1;
+  updateCartBadge(window._cartCount);
+  showToast('✅ ' + name + ' ajouté au panier !');
+}
+
+
+
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeCartModal();
 });
