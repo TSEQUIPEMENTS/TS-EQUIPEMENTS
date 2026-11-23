@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>TS EQUIPEMENTS – Catalogue Basketball</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catalogue Basketball TS EQUIPEMENTS – Ballons officiels, chaussures, maillots et chronomètres professionnels au Togo et en Afrique.">
+<meta property="og:title" content="TS EQUIPEMENTS – Catalogue Basketball">
+<meta property="og:description" content="Équipements Basketball haute performance. Lomé & Vogan, Togo.">
+<meta property="og:image" content="../assets/logo-ts.png">
+<link rel="icon" href="../assets/logo-ts.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ══ IMAGES PRODUITS — tailles réelles assets, miroir exact index.html ══ */
+.pi-sq   { width:100%; height:206px; background:#f0f4f1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.pi-sq   img { width:206px; height:206px; object-fit:contain; transition:opacity .22s, transform .35s; }
+.pi-land { width:100%; height:155px; background:#f0f4f1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.pi-land img { width:100%; max-width:206px; height:155px; object-fit:contain; transition:opacity .22s, transform .35s; }
+/* Ballon Basketball Pro — 206×137 */
+.pi-bball { width:100%; height:137px; background:#f0f4f1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.pi-bball img { width:100%; max-width:206px; height:137px; object-fit:contain; transition:opacity .22s, transform .35s; }
+.pi-sq img:hover, .pi-land img:hover, .pi-bball img:hover { transform:scale(1.06); }
+.img-fading { opacity:0 !important; }
+
+/* ══ SÉLECTEUR MODÈLE — identique index.html ══ */
+.model-sel { display:flex; flex-direction:column; gap:3px; margin:5px 0; }
+.model-sel label { font-family:'Barlow Condensed',sans-serif; font-size:.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#64748b; }
+.model-sel select { padding:5px 8px; border-radius:4px; border:1px solid #dde3dd; font-size:.85rem; background:white; cursor:pointer; outline:none; }
+.model-sel select:focus { border-color:var(--green); }
+
+/* ══ HEADER LOGO BADGE — identique index.html ══ */
+.lt-ts {
+  background:#ffd400; color:#000;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:1rem; letter-spacing:2px;
+  padding:2px 7px; margin-right:5px;
+  display:inline-block; line-height:1.5;
+}
+.lt-equip {
+  color:#ffffff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:1.1rem; letter-spacing:3px;
+}
+
+/* ══ FOOTER LOGO BADGE — identique index.html ══ */
+.fl-ts  { background:#ffd400; color:#000; font-weight:900; padding:1px 6px; margin-right:4px; display:inline-block; }
+.fl-equip { color:#ffffff; letter-spacing:3px; }
+
+/* ══ COMPTEUR PRODUITS ══ */
+.cat-count {
+  text-align:center; margin-bottom:20px;
+  font-family:'Barlow Condensed',sans-serif; font-size:.85rem;
+  font-weight:700; letter-spacing:2px; color:var(--gray); text-transform:uppercase;
+}
+.cat-count span { color:var(--green); font-size:1.1rem; }
+
+/* ══ PAGE HERO h1 ══ */
+.page-hero h1 { color:white; }
+.page-hero h1 .accent { color:var(--yellow); }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">✔ Produit ajouté au panier !</div>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <div class="logo-box">
+    <img src="../assets/logo-ts.png" alt="Logo TS EQUIPEMENTS">
+    <div class="logo-text">
+      <span class="lt-ts">TS</span><span class="lt-equip">EQUIPEMENTS</span>
+    </div>
+  </div>
+  <div class="burger" id="burger" role="button" tabindex="0" aria-label="Menu">
+    <div></div><div></div><div></div>
+  </div>
+  <nav>
+    <div class="nav-links" id="nav-links">
+      <a href="../index.html">🏠 Accueil</a>
+      <a href="football.html">⚽ Football</a>
+      <a href="basketball.html" class="active">🏀 Basketball</a>
+      <a href="../index.html#bestsellers">Top Ventes</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <button class="cart-btn" aria-label="Panier">🛒 Panier <span id="cart-count">0</span></button>
+  </nav>
+</header>
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1600&q=80'); background-position:center;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <span class="hero-tag">🏀 Discipline — Basketball</span>
+    <h1>CATALOGUE<br><span class="accent">BASKETBALL</span></h1>
+    <p>Ballons officiels, chaussures indoor haute performance, maillots et chronomètres Shot Clock professionnels.</p>
+    <div style="margin-top:28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a href="#catalogue" class="btn-primary">🏆 Voir les produits</a>
+      <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-whatsapp">💬 Commander WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STATS ════ -->
+<div class="stats-strip">
+  <div class="stat-item"><h3>30+</h3><p>Modèles Basketball</p></div>
+  <div class="stat-item"><h3>FIBA</h3><p>Standard officiel</p></div>
+  <div class="stat-item"><h3>15+</h3><p>Pays livrés</p></div>
+  <div class="stat-item"><h3>200+</h3><p>Clubs équipés</p></div>
+</div>
+
+<!-- ════ CATALOGUE ════ -->
+<section class="section" id="catalogue" style="background:white;">
+  <div class="section-header">
+    <span class="eyebrow">Équipements Basketball</span>
+    <h2>NOS <span>PRODUITS</span></h2>
+    <p>Matériel pro pour salles indoor, terrains extérieurs et académies de basketball.</p>
+  </div>
+
+  <!-- FILTRES -->
+  <div class="filter-bar">
+    <select id="sort-sel" aria-label="Trier par">
+      <option value="default">Trier par popularité</option>
+      <option value="asc">Prix croissant</option>
+      <option value="desc">Prix décroissant</option>
+    </select>
+    <select id="cat-sel" aria-label="Catégorie">
+      <option value="all">Toutes catégories</option>
+      <option value="ballons">🏀 Ballons</option>
+      <option value="chaussures">👟 Chaussures</option>
+      <option value="maillots">👕 Maillots</option>
+      <option value="chronometres">⏱ Chronomètres</option>
+      <option value="accessoires">🎽 Accessoires</option>
+    </select>
+  </div>
+
+  <p class="cat-count">Affichage : <span id="prod-count">10</span> produits</p>
+
+  <div class="product-grid" id="pgrid">
+
+    <!-- ── 1. BALLON BASKETBALL (T5 & T6) ── -->
+    <div class="product" data-category="ballons" data-price="20000">
+      <div class="badge new">FIBA</div>
+      <div class="pi-bball" id="wrap-bask-b">
+        <img id="img-bask-b"
+          src="../assets/bask ball taille 5 .png"
+          alt="Ballon Basketball Taille 5"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏀</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-bask-b">Ballon Basketball – Taille 5</h4>
+        <p id="desc-bask-b">Ballon T5 – Enfant / Mini Basketball, grip renforcé, usage intérieur &amp; extérieur</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select onchange="changeBaskB(this.value)">
+            <option value="5" selected>Taille 5 – Enfant/Mini (20 000 F)</option>
+            <option value="6">Taille 6 – Femmes &amp; Juniors (25 000 F)</option>
+          </select>
+        </div>
+        <div class="price" id="price-bask-b">20 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2. BALLON BASKETBALL PRO (206×137) ── -->
+    <div class="product" data-category="ballons" data-price="30000">
+      <div class="badge">PRO</div>
+      <div class="pi-bball">
+        <img src="../assets/Ballon Basketball Pro.png"
+          alt="Ballon Basketball Pro"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏀</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Ballon Basketball Pro</h4>
+        <p>Ballon officiel taille 7 – Homme, grip ultra-résistant, usage indoor &amp; outdoor</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select>
+            <option>5 – Enfant</option>
+            <option>6 – Femmes/Juniors</option>
+            <option selected>7 – Hommes (officiel)</option>
+          </select>
+        </div>
+        <div class="price">30 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. CHAUSSURES BASKETBALL ELITE ── -->
+    <div class="product" data-category="chaussures" data-price="15000">
+      <div class="badge">TOP</div>
+      <div class="pi-sq">
+        <img src="../assets/Chaussures Basky Elite.png"
+          alt="Chaussures Basketball Elite"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👟</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Chaussures Basketball Elite</h4>
+        <p>Semelle indoor anti-dérapante, tige haute protection cheville, amorti renforcé</p>
+        <div class="model-sel">
+          <label>Pointure</label>
+          <select>
+            <option>39</option><option>40</option><option>41</option>
+            <option>42</option><option>43</option><option>44</option><option>45</option>
+          </select>
+        </div>
+        <div class="price">15 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. MAILLOT BASKETBALL (12 modèles dynamiques) ── -->
+    <div class="product" data-category="maillots" data-price="8500">
+      <div class="badge promo">PROMO</div>
+      <div class="pi-sq" id="wrap-bmaillot">
+        <img id="img-bmaillot"
+          src="../assets/Maillot de basketball 1.png"
+          alt="Maillot Basketball 1"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-bmaillot">Maillot Basketball – N°1</h4>
+        <p>Maillot officiel, tissu dry-fit haute respirabilité, personnalisable numéro &amp; logo club</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeBMaillotB(this.value)">
+            <option value="1">Maillot 1 — 8 500 F</option>
+            <option value="2">Maillot 2 — 8 500 F</option>
+            <option value="3">Maillot 3 — 7 500 F</option>
+            <option value="4">Maillot 4 — 8 500 F</option>
+            <option value="5">Maillot 5 — 7 500 F</option>
+            <option value="6">Maillot 6 — 6 500 F</option>
+            <option value="7">Maillot 7 — 7 500 F</option>
+            <option value="8">Maillot 8 — 7 500 F</option>
+            <option value="9">Maillot 9 — 7 500 F</option>
+            <option value="10">Maillot 10 — 6 500 F</option>
+            <option value="11">Maillot 11 — 8 500 F</option>
+            <option value="12">Maillot 12 — 7 500 F</option>
+          </select>
+        </div>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="price" id="price-bmaillot">8 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. MAILLOT BASKETBALL OFFICIEL ── -->
+    <div class="product" data-category="maillots" data-price="30000">
+      <div class="pi-sq">
+        <img src="../assets/Maillot Basketball Officiel.png"
+          alt="Maillot Basketball Officiel"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>👕</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Maillot Basketball Officiel</h4>
+        <p>Tenue officielle club, personnalisable numéro &amp; logo, tissu dry-fit pro</p>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="price">30 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 6. CHRONOMÈTRE SHOT CLOCK (2 modèles) ── -->
+    <div class="product" data-category="chronometres" data-price="25000">
+      <div class="badge new">OFFICIEL</div>
+      <div class="pi-sq" id="wrap-chrono-b">
+        <img id="img-chrono-b"
+          src="../assets/Chronomètre shot clock d.png"
+          alt="Shot Clock Doré"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>⏱</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-chrono-b">Chronomètre Shot Clock – Doré</h4>
+        <p>Shot Clock 24 secondes officiel FIBA, affichage LED haute luminosité, usage club</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeChronoB(this.value)">
+            <option value="d" selected>Shot Clock Doré — 25 000 F</option>
+            <option value="j">Shot Clock Jaune — 30 000 F</option>
+          </select>
+        </div>
+        <div class="price" id="price-chrono-b">25 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 7. GENOUILLÈRES KNEE (4 modèles) ── -->
+    <div class="product" data-category="accessoires" data-price="6500">
+      <div class="pi-sq">
+        <img id="img-knee-b"
+          src="../assets/Genouillères KNEE 1.png"
+          alt="Genouillères KNEE 1"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🦵</span>'">
+      </div>
+      <div class="product-body">
+        <h4 id="name-knee-b">Genouillères KNEE – Modèle 1</h4>
+        <p>Protection genou haute performance, maintien optimal pour les sauts et réceptions</p>
+        <div class="model-sel">
+          <label>Modèle</label>
+          <select onchange="changeKneeB(this.value)">
+            <option value="1">KNEE 1 — 6 500 F</option>
+            <option value="2">KNEE 2 — 6 500 F</option>
+            <option value="v">KNEE V — 7 500 F</option>
+            <option value="x">KNEE X — 8 500 F</option>
+          </select>
+        </div>
+        <div class="model-sel">
+          <label>Taille</label>
+          <select><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        </div>
+        <div class="price" id="price-knee-b">6 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 8. MANCHONS DE COMPRESSION ── [BUG CORRIGÉ : balise <img> manquante] -->
+    <div class="product" data-category="accessoires" data-price="3500">
+      <div class="pi-sq" style="background:#eef3ee;">
+        <img src="../assets/Manchons de Compression.png"
+          alt="Manchons de Compression"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>💪</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Manchons de Compression</h4>
+        <p>Manchons bras &amp; cheville, maintien muscle, anti-vibrations, usage intensif</p>
+        <div class="model-sel">
+          <label>Type</label>
+          <select>
+            <option>Bras – S/M</option>
+            <option>Bras – L/XL</option>
+            <option>Cheville – S/M</option>
+            <option>Cheville – L/XL</option>
+          </select>
+        </div>
+        <div class="price">3 500 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 9. ACCESSOIRES BASKETBALL ── [BUG CORRIGÉ : data-price aligné sur le prix affiché 45 000 F] -->
+    <div class="product" data-category="accessoires" data-price="45000">
+      <div class="pi-sq">
+        <img src="../assets/Accessoires sportero.png"
+          alt="Accessoires Basketball"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🎽</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Accessoires Basketball</h4>
+        <p>Sacs de sport, sifflets arbitre, cônes d'entraînement, bouteilles isothermes</p>
+        <div class="price">45 000 F CFA</div>
+        <div class="product-actions">
+          <button class="add">🛒 Ajouter au panier</button>
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Commander WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 10. ÉQUIPEMENTS SALLE (sur devis) ── [BUG CORRIGÉ : balise <img> fermée correctement] -->
+    <div class="product" data-category="accessoires" data-price="0">
+      <div class="pi-sq" style="background:#eef3ee;">
+        <img src="../assets/Équipements Salle Basketball.png"
+          alt="Équipements Salle Basketball"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:3rem;opacity:.3>🏀</span>'">
+      </div>
+      <div class="product-body">
+        <h4>Équipements Salle Basketball</h4>
+        <p>Paniers, panneaux de marquage, tapis de protection, équipements officiels FIBA</p>
+        <div class="price" style="color:var(--green); font-size:1rem;">Sur devis</div>
+        <div class="product-actions">
+          <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="whatsapp-btn">💬 Demander un devis</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /product-grid -->
+</section>
+
+<!-- ════ AVANTAGES ════ -->
+<div class="advantages-strip">
+  <div class="adv-item"><div class="adv-icon">🏅</div><h3>Standard FIBA</h3><p>Matériel officiel</p></div>
+  <div class="adv-item"><div class="adv-icon">🚚</div><h3>Livraison Afrique</h3><p>Rapide &amp; sécurisée</p></div>
+  <div class="adv-item"><div class="adv-icon">📱</div><h3>Paiement Mobile</h3><p>Mobile Money &amp; Carte</p></div>
+  <div class="adv-item"><div class="adv-icon">🤝</div><h3>Support Clubs</h3><p>Accompagnement équipes</p></div>
+</div>
+
+<!-- ════ CTA COMMANDE GROUPÉE ════ -->
+<section style="background:var(--green); padding:60px 5%; text-align:center;">
+  <h2 style="color:white; font-size:clamp(1.6rem,4vw,2.5rem); margin-bottom:12px;">ÉQUIPEZ VOTRE CLUB EN TOTALITÉ ?</h2>
+  <p style="color:rgba(255,255,255,.8); max-width:500px; margin:0 auto 28px;">Devis personnalisé pour académies, clubs et fédérations – livraison partout en Afrique.</p>
+  <a href="https://wa.me/22892747464" target="_blank" rel="noopener" class="btn-whatsapp" style="font-size:1.1rem; padding:16px 40px; display:inline-flex;">💬 Contacter via WhatsApp</a>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-text">
+        <span class="fl-ts">TS</span><span class="fl-equip">EQUIPEMENTS</span>
+      </div>
+      <p>Leader en équipements Football &amp; Basketball au Togo. Matériel certifié, livraison rapide, service club.</p>
+      <p style="margin-top:16px; color:rgba(255,255,255,.2); font-size:.8rem;">© 2026 TS EQUIPEMENTS – Tous droits réservés</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <a href="../index.html">Accueil</a>
+      <a href="football.html">Catalogue Football</a>
+      <a href="basketball.html">Catalogue Basketball</a>
+      <a href="../index.html#bestsellers">Top Ventes</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <div>
+      <h4>Lomé – Dagué</h4>
+      <p>📞 +228 92 74 74 64</p>
+      <p>📞 +228 98 69 68 61</p>
+    </div>
+    <div>
+      <h4>Vogan</h4>
+      <p>📞 +228 90 48 48 81</p>
+      <p>📞 +228 97 89 25 89</p>
+      <p style="margin-top:8px;"><a href="mailto:contact@tsequipements.com">✉️ contact@tsequipements.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>TS EQUIPEMENTS – Togo / Afrique</span>
+    <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></span>
+  </div>
+</footer>
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+/* ─── Utilitaire swap image avec fondu — identique index.html ─── */
+function swapImg(id, src, alt) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('img-fading');
+  setTimeout(function () {
+    el.src = src; el.alt = alt || '';
+    el.classList.remove('img-fading');
+  }, 220);
+}
+
+/* ─── 1. BALLON BASKETBALL T5 / T6 ─── */
+var baskMapB = {
+  '5': { src: '../assets/bask ball taille 5 .png', alt: 'Ballon Basketball T5', name: 'Ballon Basketball – Taille 5', desc: 'Ballon T5 – Enfant / Mini Basketball, grip renforcé, indoor & outdoor',           price: '20 000 F CFA' },
+  '6': { src: '../assets/bask ball taille 6 .png', alt: 'Ballon Basketball T6', name: 'Ballon Basketball – Taille 6', desc: 'Ballon officiel T6 – Femmes & Juniors, usage indoor & outdoor',                   price: '25 000 F CFA' }
+};
+function changeBaskB(t) {
+  var d = baskMapB[t]; if (!d) return;
+  swapImg('img-bask-b', d.src, d.alt);
+  document.getElementById('name-bask-b').textContent  = d.name;
+  document.getElementById('desc-bask-b').textContent  = d.desc;
+  document.getElementById('price-bask-b').textContent = d.price;
+}
+
+/* ─── 2. MAILLOT BASKETBALL (12 modèles) ─── */
+var bmaillotPricesB = { '1':8500,'2':8500,'3':7500,'4':8500,'5':7500,'6':6500,'7':7500,'8':7500,'9':7500,'10':6500,'11':8500,'12':7500 };
+function changeBMaillotB(v) {
+  swapImg('img-bmaillot', '../assets/Maillot de basketball ' + v + '.png', 'Maillot Basketball N°' + v);
+  document.getElementById('name-bmaillot').textContent  = 'Maillot Basketball – N°' + v;
+  document.getElementById('price-bmaillot').textContent = (bmaillotPricesB[v] || 7500).toLocaleString('fr-FR') + ' F CFA';
+}
+
+/* ─── 3. CHRONOMÈTRE SHOT CLOCK ─── */
+var chronoMapB = {
+  'd': { src: '../assets/Chronomètre shot clock d.png', alt: 'Shot Clock Doré',  name: 'Chronomètre Shot Clock – Doré',  price: '25 000 F CFA' },
+  'j': { src: '../assets/Chronomètre shot clock j.png', alt: 'Shot Clock Jaune', name: 'Chronomètre Shot Clock – Jaune', price: '30 000 F CFA' }
+};
+function changeChronoB(v) {
+  var d = chronoMapB[v]; if (!d) return;
+  swapImg('img-chrono-b', d.src, d.alt);
+  document.getElementById('name-chrono-b').textContent  = d.name;
+  document.getElementById('price-chrono-b').textContent = d.price;
+}
+
+/* ─── 4. GENOUILLÈRES KNEE ─── */
+var kneeMapB = {
+  '1': { src: '../assets/Genouillères KNEE 1.png', name: 'Genouillères KNEE – Modèle 1', price: '6 500 F CFA' },
+  '2': { src: '../assets/Genouillères KNEE 2.png', name: 'Genouillères KNEE – Modèle 2', price: '6 500 F CFA' },
+  'v': { src: '../assets/Genouillères KNEE v.png', name: 'Genouillères KNEE – Modèle V', price: '7 500 F CFA' },
+  'x': { src: '../assets/Genouillères KNEE x.png', name: 'Genouillères KNEE – Modèle X', price: '8 500 F CFA' }
+};
+function changeKneeB(v) {
+  var d = kneeMapB[v]; if (!d) return;
+  swapImg('img-knee-b', d.src, d.name);
+  document.getElementById('name-knee-b').textContent  = d.name;
+  document.getElementById('price-knee-b').textContent = d.price;
+}
+
+/* ─── PANIER ─── */
+var cartCount = 0;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function () { t.classList.remove('show'); }, 2800);
+}
+document.querySelectorAll('.add').forEach(function (b) {
+  b.addEventListener('click', function () {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+    showToast('✔ Produit ajouté au panier !');
+  });
+});
+
+/* ─── BURGER ─── */
+var burger = document.getElementById('burger');
+var navEl   = document.getElementById('nav-links');
+burger.addEventListener('click', function () { navEl.classList.toggle('show'); });
+burger.addEventListener('keydown', function (e) { if (e.key === 'Enter') navEl.classList.toggle('show'); });
+
+/* ─── FILTRES ─── */
+var sortSel = document.getElementById('sort-sel');
+var catSel  = document.getElementById('cat-sel');
+var grid    = document.getElementById('pgrid');
+function applyFilters() {
+  var cat   = catSel.value;
+  var sort  = sortSel.value;
+  var cards = Array.from(grid.querySelectorAll('.product'));
+  cards.forEach(function (c) {
+    c.style.display = (cat === 'all' || c.dataset.category === cat) ? '' : 'none';
+  });
+  var visible = cards.filter(function (c) { return c.style.display !== 'none'; });
+  visible.sort(function (a, b) {
+    if (sort === 'asc')  return +a.dataset.price - +b.dataset.price;
+    if (sort === 'desc') return +b.dataset.price - +a.dataset.price;
+    return 0;
+  });
+  visible.forEach(function (c) { grid.appendChild(c); });
+  document.getElementById('prod-count').textContent = visible.length;
+}
+sortSel.addEventListener('change', applyFilters);
+catSel.addEventListener('change',  applyFilters);
+</script>
+</body>
+</html>
